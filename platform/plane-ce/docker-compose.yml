@@ -1,184 +1,231 @@
 version: "3.8"
 
 services:
-  # Plane Backend API Server
+  # Plane Backend API
   plane-backend:
     image: makeplane/plane-backend:latest
     container_name: platform-plane-backend
     restart: unless-stopped
+    ports:
+      - "8000"
     environment:
-      # Core Configuration
-      DJANGO_SETTINGS_MODULE: plane.settings.production
       DEBUG: "0"
-      
-      # Database Configuration
+      ENVIRONMENT: production
+      DJANGO_SETTINGS_MODULE: plane.settings.production
+
+      # Database
+      DATABASE_ENGINE: django.db.backends.postgresql
       DATABASE_HOST: platform-postgres
-      DATABASE_NAME: ${PLANE_POSTGRES_DB}
-      DATABASE_USER: ${PLANE_POSTGRES_USER}
-      DATABASE_PASSWORD: ${PLANE_POSTGRES_PASSWORD}
-      DATABASE_PORT: 5432
-      
-      # Redis Configuration
+      DATABASE_NAME: ${PLANE_POSTGRES_DB:-plane_ce}
+      DATABASE_USER: ${PLANE_POSTGRES_USER:-plane_ce}
+      DATABASE_PASSWORD: ${PLANE_POSTGRES_PASSWORD:-PlanePass123!}
+      DATABASE_PORT: "5432"
+      POSTGRES_HOST: platform-postgres
+      POSTGRES_DB: ${PLANE_POSTGRES_DB:-plane_ce}
+      POSTGRES_USER: ${PLANE_POSTGRES_USER:-plane_ce}
+      POSTGRES_PASSWORD: ${PLANE_POSTGRES_PASSWORD:-PlanePass123!}
+      POSTGRES_PORT: "5432"
+
+      # Redis
       REDIS_HOST: platform-redis
       REDIS_PORT: 6379
-      REDIS_DB: 0
-      
-      # Secret Key (for session encryption)
-      SECRET_KEY: ${PLANE_SECRET_KEY}
-      
-      # Email Configuration (optional, if using SMTP)
+      REDIS_URL: redis://platform-redis:6379
+
+      # Security
+      SECRET_KEY: ${PLANE_SECRET_KEY:-ReplaceWithLongRandomKeyForPlane789!}
+
+      # Site Configuration
+      SITE_URL: https://app.${DOMAIN:-local.test}
+      WEB_URL: https://app.${DOMAIN:-local.test}
+      API_BASE_URL: https://app.${DOMAIN:-local.test}/api
+
+      # CORS
+      ALLOWED_HOSTS: "app.${DOMAIN:-local.test},${DOMAIN:-local.test},localhost,127.0.0.1"
+      CORS_ALLOWED_ORIGINS: "https://app.${DOMAIN:-local.test},https://${DOMAIN:-local.test}"
+
+      # Admin Setup
+      ADMIN_EMAIL: ${PLANE_ADMIN_EMAIL:-admin@plane.local}
+      ADMIN_PASSWORD: ${PLANE_ADMIN_PASSWORD:-PlaneAdmin123!}
+
+      # Email Configuration
+      EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
       EMAIL_HOST: ${SMTP_HOST:-localhost}
       EMAIL_PORT: ${SMTP_PORT:-587}
-      EMAIL_HOST_USER: ${SMTP_USER}
-      EMAIL_HOST_PASSWORD: ${SMTP_PASSWORD}
+      EMAIL_HOST_USER: ${SMTP_USER:-noreply@plane.local}
+      EMAIL_HOST_PASSWORD: ${SMTP_PASSWORD:-}
       EMAIL_USE_TLS: ${SMTP_USE_TLS:-true}
-      EMAIL_FROM: ${SMTP_FROM:-noreply@plane.local}
-      
-      # AWS S3 / MinIO Configuration (for file uploads)
-      AWS_STORAGE_BUCKET_NAME: ${AWS_S3_BUCKET_NAME}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-      AWS_S3_ENDPOINT_URL: ${AWS_S3_ENDPOINT_URL}
+      EMAIL_FROM_USER: ${SMTP_FROM:-noreply@plane.local}
+
+      # File Storage (Local or S3/MinIO)
+      USE_S3: "1"
+      AWS_STORAGE_BUCKET_NAME: ${AWS_S3_BUCKET_NAME:-plane-files}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-minioadmin}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-minioadmin}
+      AWS_S3_ENDPOINT_URL: ${AWS_S3_ENDPOINT_URL:-http://platform-minio:9000}
       AWS_S3_REGION_NAME: ${AWS_S3_REGION_NAME:-us-east-1}
-      
-      # CORS & Security
-      CORS_ALLOWED_ORIGINS: https://app.${DOMAIN},https://${DOMAIN}
-      
-      # Site URL
-      SITE_URL: https://app.${DOMAIN}
-      
-      # API Base URL
-      API_BASE_URL: https://app.${DOMAIN}/api
-      
-      # File size limit (in bytes)
-      FILE_SIZE_LIMIT: ${FILE_SIZE_LIMIT:-5242880}
-      
-      # Allowed frontend URLs
-      WEB_URL: https://app.${DOMAIN}
-      
-      # Admin Email & Password (for initial setup)
-      ADMIN_EMAIL: ${PLANE_ADMIN_EMAIL}
-      ADMIN_PASSWORD: ${PLANE_ADMIN_PASSWORD}
+
+      # Logging
+      LOG_LEVEL: INFO
+
     networks:
       - proxy
+    depends_on:
+      - plane-migration
     volumes:
-      # Mount logs directory
-      - ./logs/backend:/app/logs
+      - ./logs:/app/logs
+      - ./data:/app/data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/api/health/"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 60s
+      start_period: 120s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plane-api.entrypoints=websecure"
+      - "traefik.http.routers.plane-api.rule=Host(`app.${DOMAIN}`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.plane-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.plane-api.loadbalancer.server.port=8000"
 
-  # Plane Background Worker (Celery)
+  # Database Migration Service (runs once on startup)
+  plane-migration:
+    image: makeplane/plane-backend:latest
+    container_name: platform-plane-migration
+    command: >
+      sh -c "
+      python manage.py migrate --noinput &&
+      python manage.py collectstatic --noinput &&
+      echo 'Migration completed successfully'
+      "
+    environment:
+      DEBUG: "0"
+      ENVIRONMENT: production
+      DJANGO_SETTINGS_MODULE: plane.settings.production
+
+      DATABASE_ENGINE: django.db.backends.postgresql
+      DATABASE_HOST: platform-postgres
+      DATABASE_NAME: ${PLANE_POSTGRES_DB:-plane_ce}
+      DATABASE_USER: ${PLANE_POSTGRES_USER:-plane_ce}
+      DATABASE_PASSWORD: ${PLANE_POSTGRES_PASSWORD:-PlanePass123!}
+      DATABASE_PORT: "5432"
+      POSTGRES_HOST: platform-postgres
+      POSTGRES_DB: ${PLANE_POSTGRES_DB:-plane_ce}
+      POSTGRES_USER: ${PLANE_POSTGRES_USER:-plane_ce}
+      POSTGRES_PASSWORD: ${PLANE_POSTGRES_PASSWORD:-PlanePass123!}
+      POSTGRES_PORT: "5432"
+
+      REDIS_HOST: platform-redis
+      REDIS_PORT: 6379
+      REDIS_URL: redis://platform-redis:6379
+
+      SECRET_KEY: ${PLANE_SECRET_KEY:-ReplaceWithLongRandomKeyForPlane789!}
+
+    networks:
+      - proxy
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+    restart: "no"
+
+  # Background Worker (Celery)
   plane-worker:
     image: makeplane/plane-worker:latest
     container_name: platform-plane-worker
     restart: unless-stopped
     environment:
-      # Core Configuration
-      DJANGO_SETTINGS_MODULE: plane.settings.production
       DEBUG: "0"
-      
-      # Database Configuration
+      ENVIRONMENT: production
+      DJANGO_SETTINGS_MODULE: plane.settings.production
+
+      DATABASE_ENGINE: django.db.backends.postgresql
       DATABASE_HOST: platform-postgres
-      DATABASE_NAME: ${PLANE_POSTGRES_DB}
-      DATABASE_USER: ${PLANE_POSTGRES_USER}
-      DATABASE_PASSWORD: ${PLANE_POSTGRES_PASSWORD}
+      DATABASE_NAME: ${PLANE_POSTGRES_DB:-plane_ce}
+      DATABASE_USER: ${PLANE_POSTGRES_USER:-plane_ce}
+      DATABASE_PASSWORD: ${PLANE_POSTGRES_PASSWORD:-PlanePass123!}
       DATABASE_PORT: 5432
-      
-      # Redis Configuration
+
       REDIS_HOST: platform-redis
       REDIS_PORT: 6379
-      REDIS_DB: 0
-      
-      # Secret Key
-      SECRET_KEY: ${PLANE_SECRET_KEY}
-      
-      # AWS S3 / MinIO Configuration
-      AWS_STORAGE_BUCKET_NAME: ${AWS_S3_BUCKET_NAME}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-      AWS_S3_ENDPOINT_URL: ${AWS_S3_ENDPOINT_URL}
-      AWS_S3_REGION_NAME: ${AWS_S3_REGION_NAME:-us-east-1}
-      
-      # Email Configuration
-      EMAIL_HOST: ${SMTP_HOST:-localhost}
-      EMAIL_PORT: ${SMTP_PORT:-587}
-      EMAIL_HOST_USER: ${SMTP_USER}
-      EMAIL_HOST_PASSWORD: ${SMTP_PASSWORD}
-      EMAIL_USE_TLS: ${SMTP_USE_TLS:-true}
-      EMAIL_FROM: ${SMTP_FROM:-noreply@plane.local}
-      
-      # Site URL
-      SITE_URL: https://app.${DOMAIN}
+      REDIS_URL: redis://platform-redis:6379
+
+      SECRET_KEY: ${PLANE_SECRET_KEY:-ReplaceWithLongRandomKeyForPlane789!}
+
+      SITE_URL: https://app.${DOMAIN:-local.test}
+
+      USE_S3: "1"
+      AWS_STORAGE_BUCKET_NAME: ${AWS_S3_BUCKET_NAME:-plane-files}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-minioadmin}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-minioadmin}
+      AWS_S3_ENDPOINT_URL: ${AWS_S3_ENDPOINT_URL:-http://platform-minio:9000}
+
     networks:
       - proxy
     depends_on:
       - plane-backend
     volumes:
-      - ./logs/worker:/app/logs
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "celery", "-A", "plane", "inspect", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
-  # Plane Scheduler (Beat Worker)
+  # Celery Beat (Scheduler)
   plane-beat:
     image: makeplane/plane-worker:latest
     container_name: platform-plane-beat
     restart: unless-stopped
     environment:
-      # Core Configuration
-      DJANGO_SETTINGS_MODULE: plane.settings.production
       DEBUG: "0"
-      
-      # Database Configuration
+      ENVIRONMENT: production
+      DJANGO_SETTINGS_MODULE: plane.settings.production
+
+      DATABASE_ENGINE: django.db.backends.postgresql
       DATABASE_HOST: platform-postgres
-      DATABASE_NAME: ${PLANE_POSTGRES_DB}
-      DATABASE_USER: ${PLANE_POSTGRES_USER}
-      DATABASE_PASSWORD: ${PLANE_POSTGRES_PASSWORD}
+      DATABASE_NAME: ${PLANE_POSTGRES_DB:-plane_ce}
+      DATABASE_USER: ${PLANE_POSTGRES_USER:-plane_ce}
+      DATABASE_PASSWORD: ${PLANE_POSTGRES_PASSWORD:-PlanePass123!}
       DATABASE_PORT: 5432
-      
-      # Redis Configuration
+
       REDIS_HOST: platform-redis
       REDIS_PORT: 6379
-      REDIS_DB: 0
-      
-      # Secret Key
-      SECRET_KEY: ${PLANE_SECRET_KEY}
-      
-      # AWS S3 / MinIO Configuration
-      AWS_STORAGE_BUCKET_NAME: ${AWS_S3_BUCKET_NAME}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-      AWS_S3_ENDPOINT_URL: ${AWS_S3_ENDPOINT_URL}
-      AWS_S3_REGION_NAME: ${AWS_S3_REGION_NAME:-us-east-1}
-      
-      # Site URL
-      SITE_URL: https://app.${DOMAIN}
+      REDIS_URL: redis://platform-redis:6379
+
+      SECRET_KEY: ${PLANE_SECRET_KEY:-ReplaceWithLongRandomKeyForPlane789!}
+
+      SITE_URL: https://app.${DOMAIN:-local.test}
+
     networks:
       - proxy
     depends_on:
       - plane-backend
     volumes:
-      - ./logs/beat:/app/logs
+      - ./logs:/app/logs
 
-  # Plane Frontend (Web UI)
+  # Frontend (Next.js)
   plane-frontend:
     image: makeplane/plane-frontend:latest
     container_name: platform-plane-frontend
     restart: unless-stopped
     environment:
-      # Frontend Configuration
-      NEXT_PUBLIC_API_BASE_URL: https://app.${DOMAIN}/api
-      NEXT_PUBLIC_ADMIN_BASE_URL: https://admin.${DOMAIN}
-      NEXT_PUBLIC_WEB_URL: https://app.${DOMAIN}
-      NEXT_PUBLIC_ASSET_PREFIX: https://app.${DOMAIN}
-      
-      # Analytics (if needed)
-      NEXT_PUBLIC_ANALYTICS_ENABLED: "false"
+      NEXT_PUBLIC_API_BASE_URL: https://app.${DOMAIN:-local.test}/api
+      NEXT_PUBLIC_WEB_URL: https://app.${DOMAIN:-local.test}
+      NEXT_PUBLIC_ADMIN_BASE_URL: https://admin.${DOMAIN:-local.test}
+      NEXT_PUBLIC_ASSET_PREFIX: https://app.${DOMAIN:-local.test}
+
     networks:
       - proxy
     depends_on:
       - plane-backend
+    ports:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-frontend.entrypoints=websecure"
@@ -186,38 +233,56 @@ services:
       - "traefik.http.routers.plane-frontend.tls.certresolver=letsencrypt"
       - "traefik.http.services.plane-frontend.loadbalancer.server.port=3000"
 
-  # Plane Space (Public sharing)
+  # Public Space (Shared Views)
   plane-space:
     image: makeplane/plane-space:latest
     container_name: platform-plane-space
     restart: unless-stopped
     environment:
-      NEXT_PUBLIC_API_BASE_URL: https://app.${DOMAIN}/api
-      NEXT_PUBLIC_WEB_URL: https://app.${DOMAIN}
+      NEXT_PUBLIC_API_BASE_URL: https://app.${DOMAIN:-local.test}/api
+      NEXT_PUBLIC_WEB_URL: https://app.${DOMAIN:-local.test}
+
     networks:
       - proxy
     depends_on:
       - plane-backend
+    ports:
+      - "3001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-space.entrypoints=websecure"
-      - "traefik.http.routers.plane-space.rule=Host(`space.${DOMAIN}`) || (Host(`app.${DOMAIN}`) && Path(`/space/*`))"
+      - "traefik.http.routers.plane-space.rule=Host(`space.${DOMAIN}`)"
       - "traefik.http.routers.plane-space.tls.certresolver=letsencrypt"
       - "traefik.http.services.plane-space.loadbalancer.server.port=3001"
 
-  # Plane Admin Panel
+  # Admin Panel
   plane-admin:
     image: makeplane/plane-admin:latest
     container_name: platform-plane-admin
     restart: unless-stopped
     environment:
-      NEXT_PUBLIC_API_BASE_URL: https://app.${DOMAIN}/api
-      NEXT_PUBLIC_WEB_URL: https://app.${DOMAIN}
-      NEXT_PUBLIC_ADMIN_BASE_URL: https://admin.${DOMAIN}
+      NEXT_PUBLIC_API_BASE_URL: https://app.${DOMAIN:-local.test}/api
+      NEXT_PUBLIC_WEB_URL: https://app.${DOMAIN:-local.test}
+      NEXT_PUBLIC_ADMIN_BASE_URL: https://admin.${DOMAIN:-local.test}
+
     networks:
       - proxy
     depends_on:
       - plane-backend
+    ports:
+      - "3002"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-admin.entrypoints=websecure"
@@ -225,26 +290,39 @@ services:
       - "traefik.http.routers.plane-admin.tls.certresolver=letsencrypt"
       - "traefik.http.services.plane-admin.loadbalancer.server.port=3002"
 
-  # Plane Live (WebSocket for real-time features)
+  # Real-time WebSocket Server
   plane-live:
     image: makeplane/plane-live:latest
     container_name: platform-plane-live
     restart: unless-stopped
     environment:
       DATABASE_HOST: platform-postgres
-      DATABASE_NAME: ${PLANE_POSTGRES_DB}
-      DATABASE_USER: ${PLANE_POSTGRES_USER}
-      DATABASE_PASSWORD: ${PLANE_POSTGRES_PASSWORD}
+      DATABASE_NAME: ${PLANE_POSTGRES_DB:-plane_ce}
+      DATABASE_USER: ${PLANE_POSTGRES_USER:-plane_ce}
+      DATABASE_PASSWORD: ${PLANE_POSTGRES_PASSWORD:-PlanePass123!}
       DATABASE_PORT: 5432
+
       REDIS_HOST: platform-redis
       REDIS_PORT: 6379
-      SECRET_KEY: ${PLANE_SECRET_KEY}
+
+      SECRET_KEY: ${PLANE_SECRET_KEY:-ReplaceWithLongRandomKeyForPlane789!}
+
     networks:
       - proxy
+    depends_on:
+      - plane-backend
+    ports:
+      - "3003"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-live.entrypoints=websecure"
-      - "traefik.http.routers.plane-live.rule=Host(`app.${DOMAIN}`) && Path(`/ws/*`)"
+      - "traefik.http.routers.plane-live.rule=Host(`app.${DOMAIN}`) && PathPrefix(`/ws`)"
       - "traefik.http.routers.plane-live.tls.certresolver=letsencrypt"
       - "traefik.http.services.plane-live.loadbalancer.server.port=3003"
 
