@@ -1,0 +1,925 @@
+====================================================
+PLATFORM DEBUG REPORT
+Timestamp: Sat Apr 25 13:35:06 +07 2026
+Project: platform
+====================================================
+
+--- [1] SYSTEM INFORMATION ---
+OS: Darwin 192.168.1.132 25.2.0 Darwin Kernel Version 25.2.0: Tue Nov 18 21:08:48 PST 2025; root:xnu-12377.61.12~1/RELEASE_ARM64_T8132 arm64
+Docker Version: 29.2.0
+Docker Compose Version: Docker Compose version v5.0.2
+
+--- [2] DIRECTORY STRUCTURE ---
+QUICKSTART.md
+README.md
+authentik
+compose.shared.yml
+debug_report_20260425_133506.log
+nocobase
+platform_walkthrough.md
+postgres
+redis
+scripts
+traefik
+
+./authentik:
+certs
+custom-templates
+docker-compose.yml
+media
+
+./authentik/certs:
+
+./authentik/custom-templates:
+
+./authentik/media:
+public
+
+./authentik/media/public:
+
+./nocobase:
+data
+docker-compose.yml
+storage
+
+./nocobase/data:
+ai
+apps
+db
+logs
+nocobase.conf
+plugins
+uploads
+
+./nocobase/data/ai:
+docs
+
+./nocobase/data/ai/docs:
+meta.json
+runjs
+
+./nocobase/data/ai/docs/runjs:
+context
+document.md
+files.json
+import-modules.md
+import-modules__example-1.md
+import-modules__example-2.md
+import-modules__example-3.md
+import-modules__example-4.md
+import-modules__example-5.md
+import-modules__example-6.md
+import-modules__example-7.md
+index.json
+index.md
+index__example-1.md
+index__example-2.md
+index__example-3.md
+index__example-4.md
+index__example-5.md
+jsx.md
+jsx__example-1.md
+jsx__example-2.md
+jsx__example-3.md
+jsx__example-4.md
+jsx__example-5.md
+model
+render.md
+render__example-1.md
+render__example-2.md
+render__example-3.md
+render__example-4.md
+render__example-5.md
+render__example-6.md
+render__example-7.md
+resource
+window.md
+
+./nocobase/data/ai/docs/runjs/context:
+block-model.md
+block-model__example-1.md
+block-model__example-2.md
+block-model__example-3.md
+block-model__example-4.md
+block-model__example-5.md
+collection-field.md
+collection-field__example-1.md
+collection-field__example-2.md
+collection-field__example-3.md
+collection-field__example-4.md
+collection-field__example-5.md
+collection-field__example-6.md
+collection.md
+collection__example-1.md
+collection__example-2.md
+collection__example-3.md
+collection__example-4.md
+data-source-manager.md
+data-source-manager__example-1.md
+data-source-manager__example-2.md
+data-source-manager__example-3.md
+data-source-manager__example-4.md
+data-source-manager__example-5.md
+data-source-manager__example-6.md
+data-source.md
+data-source__example-1.md
+data-source__example-2.md
+data-source__example-3.md
+data-source__example-4.md
+data-source__example-5.md
+element.md
+element__example-1.md
+element__example-2.md
+element__example-3.md
+element__example-4.md
+exit-all.md
+exit-all__example-1.md
+exit-all__example-2.md
+exit-all__example-3.md
+exit-all__example-4.md
+exit-all__example-5.md
+exit.md
+exit__example-1.md
+exit__example-2.md
+exit__example-3.md
+exit__example-4.md
+exit__example-5.md
+exit__example-6.md
+filter-manager.md
+filter-manager__example-1.md
+filter-manager__example-2.md
+filter-manager__example-3.md
+filter-manager__example-4.md
+filter-manager__example-5.md
+form.md
+form__example-1.md
+form__example-10.md
+form__example-2.md
+form__example-3.md
+form__example-4.md
+form__example-5.md
+form__example-6.md
+form__example-7.md
+form__example-8.md
+form__example-9.md
+get-model.md
+get-model__example-1.md
+get-model__example-2.md
+get-model__example-3.md
+get-model__example-4.md
+get-model__example-5.md
+get-value.md
+get-var.md
+get-var__example-1.md
+get-var__example-10.md
+get-var__example-2.md
+get-var__example-3.md
+get-var__example-4.md
+get-var__example-5.md
+get-var__example-6.md
+get-var__example-7.md
+get-var__example-8.md
+get-var__example-9.md
+i18n.md
+i18n__example-1.md
+i18n__example-2.md
+i18n__example-3.md
+i18n__example-4.md
+import-async.md
+import-async__example-1.md
+import-async__example-2.md
+import-async__example-3.md
+import-async__example-4.md
+import-async__example-5.md
+import-async__example-6.md
+import-async__example-7.md
+init-resource.md
+init-resource__example-1.md
+init-resource__example-2.md
+init-resource__example-3.md
+init-resource__example-4.md
+libs.md
+libs__example-1.md
+libs__example-2.md
+libs__example-3.md
+libs__example-4.md
+libs__example-5.md
+libs__example-6.md
+libs__example-7.md
+location.md
+location__example-1.md
+location__example-2.md
+location__example-3.md
+location__example-4.md
+location__example-5.md
+logger.md
+logger__example-1.md
+logger__example-2.md
+logger__example-3.md
+logger__example-4.md
+make-resource.md
+make-resource__example-1.md
+make-resource__example-2.md
+make-resource__example-3.md
+make-resource__example-4.md
+message.md
+message__example-1.md
+message__example-2.md
+message__example-3.md
+message__example-4.md
+message__example-5.md
+message__example-6.md
+message__example-7.md
+modal.md
+modal__example-1.md
+modal__example-2.md
+modal__example-3.md
+modal__example-4.md
+modal__example-5.md
+model.md
+model__example-1.md
+model__example-2.md
+model__example-3.md
+model__example-4.md
+notification.md
+notification__example-1.md
+notification__example-2.md
+notification__example-3.md
+notification__example-4.md
+notification__example-5.md
+off.md
+on.md
+on__example-1.md
+on__example-2.md
+on__example-3.md
+on__example-4.md
+open-view.md
+open-view__example-1.md
+open-view__example-2.md
+open-view__example-3.md
+open-view__example-4.md
+open-view__example-5.md
+render.md
+render__example-1.md
+render__example-2.md
+render__example-3.md
+render__example-4.md
+render__example-5.md
+render__example-6.md
+request.md
+request__example-1.md
+request__example-2.md
+request__example-3.md
+request__example-4.md
+request__example-5.md
+request__example-6.md
+request__example-7.md
+request__example-8.md
+require-async.md
+require-async__example-1.md
+require-async__example-2.md
+require-async__example-3.md
+require-async__example-4.md
+require-async__example-5.md
+resource.md
+resource__example-1.md
+resource__example-2.md
+resource__example-3.md
+resource__example-4.md
+resource__example-5.md
+route.md
+route__example-1.md
+route__example-2.md
+route__example-3.md
+route__example-4.md
+router.md
+router__example-1.md
+router__example-2.md
+router__example-3.md
+router__example-4.md
+router__example-5.md
+router__example-6.md
+set-value.md
+set-value__example-1.md
+set-value__example-2.md
+set-value__example-3.md
+set-value__example-4.md
+sql.md
+sql__example-1.md
+sql__example-2.md
+sql__example-3.md
+sql__example-4.md
+sql__example-5.md
+sql__example-6.md
+sql__example-7.md
+t.md
+t__example-1.md
+t__example-2.md
+t__example-3.md
+t__example-4.md
+t__example-5.md
+t__example-6.md
+t__example-7.md
+view.md
+view__example-1.md
+view__example-2.md
+view__example-3.md
+view__example-4.md
+
+./nocobase/data/ai/docs/runjs/model:
+form-block-model.md
+
+./nocobase/data/ai/docs/runjs/resource:
+api-resource.md
+api-resource__example-1.md
+api-resource__example-2.md
+api-resource__example-3.md
+api-resource__example-4.md
+api-resource__example-5.md
+api-resource__example-6.md
+multi-record-resource.md
+multi-record-resource__example-1.md
+multi-record-resource__example-2.md
+multi-record-resource__example-3.md
+multi-record-resource__example-4.md
+multi-record-resource__example-5.md
+multi-record-resource__example-6.md
+multi-record-resource__example-7.md
+single-record-resource.md
+single-record-resource__example-1.md
+single-record-resource__example-2.md
+single-record-resource__example-3.md
+single-record-resource__example-4.md
+single-record-resource__example-5.md
+single-record-resource__example-6.md
+single-record-resource__example-7.md
+sql-resource.md
+sql-resource__example-1.md
+sql-resource__example-2.md
+sql-resource__example-3.md
+sql-resource__example-4.md
+sql-resource__example-5.md
+sql-resource__example-6.md
+
+./nocobase/data/apps:
+main
+
+./nocobase/data/apps/main:
+aes_key.dat
+
+./nocobase/data/db:
+
+./nocobase/data/logs:
+main
+
+./nocobase/data/logs/main:
+action-export
+custom-request
+notification-manager
+request_2026-04-25.log
+sql_2026-04-25.log
+system_2026-04-24.log
+system_2026-04-25.log
+system_error_2026-04-25.log
+user-data-sync
+workflows
+
+./nocobase/data/logs/main/action-export:
+2026-04-25.log
+
+./nocobase/data/logs/main/custom-request:
+2026-04-25.log
+
+./nocobase/data/logs/main/notification-manager:
+2026-04-25.log
+
+./nocobase/data/logs/main/user-data-sync:
+2026-04-25.log
+
+./nocobase/data/logs/main/workflows:
+dispatcher
+
+./nocobase/data/logs/main/workflows/dispatcher:
+2026-04-25.log
+
+./nocobase/data/plugins:
+
+./nocobase/data/uploads:
+logo-bw96m4.png
+logo-itdh67.png
+logo-nyrcjc.png
+logo-u0gu3n.png
+logo-zexxcv.png
+
+./nocobase/storage:
+
+./postgres:
+docker-compose.yml
+init-db.sql
+
+./redis:
+docker-compose.yml
+
+./scripts:
+backup.sh
+check.sh
+debug.sh
+down.sh
+logs.sh
+remove.sh
+setup-hosts.sh
+up.sh
+
+./traefik:
+docker-compose.yml
+dynamic
+letsencrypt
+
+./traefik/dynamic:
+
+./traefik/letsencrypt:
+acme.json
+
+--- [3] ENVIRONMENT CONFIGURATION (Masked) ---
+# Global Config
+DOMAIN=local.test
+TZ=Asia/Ho_Chi_Minh
+COMPOSE_PROJECT_NAME=platform
+STACK_NAME=platform
+
+# Traefik
+TRAEFIK_EMAIL=admin@example.com
+
+# Database (Postgres)
+POSTGRES_USER=postgres
+POSTGRES_DB=postgres
+
+# Authentik
+AUTHENTIK_ERROR_REPORTING__ENABLED=false
+# Database for Authentik
+AUTHENTIK_POSTGRES_DB=authentik
+AUTHENTIK_POSTGRES_USER=authentik
+
+# NocoBase
+NOCOBASE_ADMIN_EMAIL=admin@nocobase.com
+# Database for NocoBase
+NOCOBASE_POSTGRES_DB=nocobase
+NOCOBASE_POSTGRES_USER=nocobase
+
+--- [4] HOSTS MAPPING ---
+127.0.0.1 traefik.local.test auth.local.test app.local.test
+
+--- [5] DOCKER CONTAINER STATUS ---
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED         STATUS                   PORTS                                                                          NAMES
+2159d5cfa362   nocobase/nocobase:latest              "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes             80/tcp                                                                         platform-nocobase
+d4fb31c93083   ghcr.io/goauthentik/server:2024.2.2   "dumb-init -- ak wor…"   2 minutes ago   Up 2 minutes (healthy)                                                                                  platform-authentik-worker
+b41f6e5f730c   ghcr.io/goauthentik/server:2024.2.2   "dumb-init -- ak ser…"   2 minutes ago   Up 2 minutes (healthy)                                                                                  platform-authentik-server
+f93ac84159c8   traefik:v2.11                         "/entrypoint.sh --gl…"   2 minutes ago   Up 2 minutes             0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp   platform-traefik
+d11f85cd22e8   redis:7-alpine                        "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes (healthy)   6379/tcp                                                                       platform-redis
+cef4cd077342   postgres:16-alpine                    "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes (healthy)   5432/tcp                                                                       platform-postgres
+
+--- [6] CONTAINER HEALTH HISTORY ---
+
+Container: platform-nocobase
+
+
+Container: platform-authentik-worker
+Status: running, Health: healthy, ExitCode: 0, Error: 
+
+Container: platform-authentik-server
+Status: running, Health: healthy, ExitCode: 0, Error: 
+
+Container: platform-traefik
+
+
+Container: platform-redis
+Status: running, Health: healthy, ExitCode: 0, Error: 
+
+Container: platform-postgres
+Status: running, Health: healthy, ExitCode: 0, Error: 
+
+--- [7] CONTAINER LOGS (Last 100 lines each) ---
+
+----------------------------------------------------
+LOGS FOR: platform-nocobase
+----------------------------------------------------
+cat: /app/commit_hash.txt: No such file or directory
+COMMIT_HASH: 
+copying...
+yarn run v1.22.22
+$ nocobase postinstall
+Done in 0.48s.
+yarn run v1.22.22
+$ nocobase db:auth
+About to overwrite ArrayBuffer.prototype properties ["sliceToImmutable","immutable","transferToImmutable"]
+{"level":"info","message":"run static import","extra":{"packageName":"@nocobase/plugin-multi-app-manager"},"meta":{"packageName":"@nocobase/plugin-multi-app-manager"},"module":"cli","submodule":"","method":"","app":"main","dataSourceKey":"main","timestamp":"2026-04-25 06:32:56"}
+{"level":"info","message":"App supervisor initialized","extra":{"discoveryAdapter":"legacy","processAdapter":"legacy","commandAdapter":""},"meta":{"discoveryAdapter":"legacy","processAdapter":"legacy","commandAdapter":""},"module":"app-supervisor","submodule":"","method":"","app":"main","dataSourceKey":"main","timestamp":"2026-04-25 06:32:56"}
+{"level":"info","message":"connection has been established successfully.","extra":{"method":"auth"},"meta":{},"module":"database","submodule":"","method":"auth","app":"main","reqId":"39af565f-2b3a-4ba7-9fc9-1542492f257b","dataSourceKey":"main","timestamp":"2026-04-25 06:32:56"}
+{"level":"info","message":"[queue] gracefully shutting down...","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"39af565f-2b3a-4ba7-9fc9-1542492f257b","dataSourceKey":"main","timestamp":"2026-04-25 06:32:56"}
+Done in 1.88s.
+yarn run v1.22.22
+$ nocobase create-nginx-conf
+Done in 0.18s.
+yarn run v1.22.22
+$ nocobase generate-instance-id
+2026-04-25 06:32:57 [[32minfo[39m] Generating InstanceID... 
+2026-04-25 06:32:57 [[32minfo[39m] InstanceID already exists at /app/nocobase/storage/.license/instance-id 
+Done in 0.16s.
+nginx started
+yarn run v1.22.22
+$ nocobase start --quickstart
+$ nocobase pkg download-pro
+2026-04-25 06:32:57 [[32minfo[39m] License key not found 
+2026-04-25T06:32:58: PM2 log: Launching in no daemon mode
+2026-04-25T06:32:58: PM2 log: App [index:0] starting in -fork mode-
+2026-04-25T06:32:58: PM2 log: App [index:0] online
+About to overwrite ArrayBuffer.prototype properties ["sliceToImmutable","immutable","transferToImmutable"]
+{"level":"info","message":"run static import","extra":{"packageName":"@nocobase/plugin-multi-app-manager"},"meta":{"packageName":"@nocobase/plugin-multi-app-manager"},"module":"cli","submodule":"","method":"","app":"main","dataSourceKey":"main","timestamp":"2026-04-25 06:32:59"}
+{"level":"info","message":"App supervisor initialized","extra":{"discoveryAdapter":"legacy","processAdapter":"legacy","commandAdapter":""},"meta":{"discoveryAdapter":"legacy","processAdapter":"legacy","commandAdapter":""},"module":"app-supervisor","submodule":"","method":"","app":"main","dataSourceKey":"main","timestamp":"2026-04-25 06:32:59"}
+Gateway IPC Server running at /root/.nocobase/gateway.sock
+Gateway HTTP Server running at http://0.0.0.0:13000/
+{"level":"info","message":"connection has been established successfully.","extra":{"method":"auth"},"meta":{},"module":"database","submodule":"","method":"auth","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:32:59"}
+{"level":"info","message":"Docs index generated for module \"runjs\"","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:00"}
+{"level":"info","message":"allocate worker id: 13","extra":{"method":"load"},"meta":{},"module":"application","submodule":"","method":"load","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:00"}
+{"level":"info","message":"start install built-in plugins","extra":{},"meta":{},"module":"nocobase","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:00"}
+{"level":"warn","message":"tools [common] register ignored: ToolsOptions not export as default at /app/nocobase/node_modules/@nocobase/plugin-data-source-manager/dist/ai/tools/data-query/common.js","extra":{},"meta":{},"module":"data-source-manager","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:00"}
+{"level":"warn","message":"tools [utils] register ignored: ToolsOptions not export as default at /app/nocobase/node_modules/@nocobase/plugin-data-source-manager/dist/ai/tools/data-query/utils.js","extra":{},"meta":{},"module":"data-source-manager","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:00"}
+(sequelize) Warning: PostgreSQL does not support BLOB (BYTEA) with options. Plain `BYTEA` will be used instead. 
+>> Check: http://www.postgresql.org/docs/9.4/static/datatype.html
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.file-manager","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.data-source-manager","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.acl","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.data-source-manager","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.acl","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.data-source-manager","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.acl","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"info","message":"setup built-in employees","extra":{},"meta":{},"module":"ai","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"info","message":"setup [orin] AI employee for data modeling","extra":{},"meta":{},"module":"ai","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"info","message":"setup [nathan] AI employee for coding","extra":{},"meta":{},"module":"ai","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"info","message":"setup [dex] AI employee for extract and structure data from text, and can fill forms automatically.","extra":{},"meta":{},"module":"ai","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"info","message":"setup [viz] Insights analyst","extra":{},"meta":{},"module":"ai","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"info","message":"setup [vera] Research analyst","extra":{},"meta":{},"module":"ai","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"info","message":"setup [lexi] Translator","extra":{},"meta":{},"module":"ai","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"info","message":"setup [ellis] Email expert","extra":{},"meta":{},"module":"ai","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"info","message":"setup [dara] Data visualization specialist","extra":{},"meta":{},"module":"ai","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:01"}
+{"level":"info","message":"finish install built-in plugins","extra":{},"meta":{},"module":"nocobase","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.data-source-manager","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.acl","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.data-source-manager","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"warn","message":"[PubSubManager] adapter is not exist or not connected, cannot publish message to channel main.sync.acl","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"info","message":"restarting...","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"info","message":"app is stopping, draining local queues...","timestamp":"2026-04-25 06:33:02"}
+{"level":"info","message":"local queues drained","timestamp":"2026-04-25 06:33:02"}
+{"level":"info","message":"stopping workflow plugin before app (main) shutdown...","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"info","message":"app.reload()","extra":{"method":"load"},"meta":{},"module":"application","submodule":"","method":"load","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"info","message":"allocate worker id: 1","extra":{"method":"load"},"meta":{},"module":"application","submodule":"","method":"load","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"warn","message":"AsyncTaskManager already exists, skipping initialization.","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"warn","message":"tools [common] register ignored: ToolsOptions not export as default at /app/nocobase/node_modules/@nocobase/plugin-data-source-manager/dist/ai/tools/data-query/common.js","extra":{},"meta":{},"module":"data-source-manager","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"warn","message":"tools [utils] register ignored: ToolsOptions not export as default at /app/nocobase/node_modules/@nocobase/plugin-data-source-manager/dist/ai/tools/data-query/utils.js","extra":{},"meta":{},"module":"data-source-manager","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"info","message":"memory queue storage file not found, skip","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+SES Removing unpermitted intrinsics
+  Removing intrinsics.Object.keys.shim
+  Removing intrinsics.Reflect.decorate
+  Removing intrinsics.Reflect.metadata
+  Removing intrinsics.Reflect.defineMetadata
+  Removing intrinsics.Reflect.hasMetadata
+  Removing intrinsics.Reflect.hasOwnMetadata
+  Removing intrinsics.Reflect.getMetadata
+  Removing intrinsics.Reflect.getOwnMetadata
+  Removing intrinsics.Reflect.getMetadataKeys
+  Removing intrinsics.Reflect.getOwnMetadataKeys
+  Removing intrinsics.Reflect.deleteMetadata
+{"level":"info","message":"memory queue storage file not found, skip","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"info","message":"write roles to ACL","extra":{"method":"writeRolesToACL"},"meta":{},"module":"acl","submodule":"","method":"writeRolesToACL","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+{"level":"info","message":"(starting) check for queueing executions","timestamp":"2026-04-25 06:33:02"}
+{"level":"info","message":"app has been started","extra":{},"meta":{},"module":"application","submodule":"","method":"","app":"main","reqId":"5716d19a-faf7-42a9-96f2-27a37c597d0a","dataSourceKey":"main","timestamp":"2026-04-25 06:33:02"}
+
+----------------------------------------------------
+LOGS FOR: platform-authentik-worker
+----------------------------------------------------
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "84b3792e-d7ec-4e9b-ba15-ba6c07d5798e", "task_name": "outpost_post_save", "timestamp": "2026-04-25T06:33:33.414057"}
+{"domain_url": null, "event": "Model does not exist", "level": "warning", "logger": "authentik.outposts.tasks", "model": "<class 'authentik.brands.models.Brand'>", "pid": 175, "pk": "UUID('df818876-5e2a-4811-a904-56f1f2f93452')", "schema_name": "public", "task_id": "task-84b3792ed7ec4e9bba15ba6c07d5798e", "timestamp": "2026-04-25T06:33:33.418864"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "84b3792ed7ec4e9bba15ba6c07d5798e", "task_name": "outpost_post_save", "timestamp": "2026-04-25T06:33:33.419314"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "7ddef882-2c65-46d8-a4c9-2257ff12613a", "task_name": "outpost_post_save", "timestamp": "2026-04-25T06:33:33.419987"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "7ddef8822c6546d8a4c92257ff12613a", "task_name": "outpost_post_save", "timestamp": "2026-04-25T06:33:33.425363"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "ffde2c95-91da-4498-bbe7-582954433e37", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:33:33.426138"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "a3651cc7eb0242c681a05cc27bbd3e14", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:33:33.435221"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "20b4035b71f845a8a28cb98ce0a67b81", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:33:33.436147"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "83f67a2d4a4f4369b7813898e0a81443", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:33:33.436646"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "ffde2c9591da4498bbe7582954433e37", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:33:33.437044"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "a3651cc7-eb02-42c6-81a0-5cc27bbd3e14", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:33:33.438104"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-a3651cc7eb0242c681a05cc27bbd3e14", "timestamp": "2026-04-25T06:33:33.453084"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "a3651cc7eb0242c681a05cc27bbd3e14", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:33:33.454467"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "20b4035b-71f8-45a8-a28c-b98ce0a67b81", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:33:33.455179"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-20b4035b71f845a8a28cb98ce0a67b81", "timestamp": "2026-04-25T06:33:33.467300"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "20b4035b71f845a8a28cb98ce0a67b81", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:33:33.468902"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "83f67a2d-4a4f-4369-b781-3898e0a81443", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:33:33.470303"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-83f67a2d4a4f4369b7813898e0a81443", "timestamp": "2026-04-25T06:33:33.481351"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-83f67a2d4a4f4369b7813898e0a81443", "timestamp": "2026-04-25T06:33:33.482867"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "83f67a2d4a4f4369b7813898e0a81443", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:33:33.484222"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 174, "schema_name": "public", "state": "SUCCESS", "task_id": "16c301eaee50425b880551c5ba49a46b", "task_name": "apply_blueprint", "timestamp": "2026-04-25T06:33:33.839867"}
+{"event": "TenantAwareScheduler: Sending due task user_cleanup (authentik.core.tasks.clean_temporary_users) to all tenants", "level": "info", "logger": "tenant_schemas_celery.scheduler", "timestamp": 1777098840.0350077}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "23178210-9eec-4fa8-bbf3-758bbc72474b", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:34:00.637756"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "39aa647dcafb4382a1ad1fb14c8859a0", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.658084"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "8b25464c87094d749da597ae650b2e73", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.659764"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "e660d9ee82a74f5c90276d81829d0164", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.660373"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "231782109eec4fa8bbf3758bbc72474b", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:34:00.661574"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "39aa647d-cafb-4382-a1ad-1fb14c8859a0", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:00.841359"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-39aa647dcafb4382a1ad1fb14c8859a0", "timestamp": "2026-04-25T06:34:00.867077"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "39aa647dcafb4382a1ad1fb14c8859a0", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:00.868828"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "8b25464c-8709-4d74-9da5-97ae650b2e73", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:00.871327"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "9b92bca0-3e7e-4328-a80d-07d6c5562fa0", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:34:00.874413"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-8b25464c87094d749da597ae650b2e73", "timestamp": "2026-04-25T06:34:00.888653"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "8b25464c87094d749da597ae650b2e73", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:00.890044"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "d8db59fc13a94cee8dc63a8cff4e1859", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.890227"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "d4066ecc6e9f4955972844382ff49d07", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.890777"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "68989ccae9094ddbb31e852a012d939b", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.891152"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "9afe3403-9a93-4b0b-af53-596512ee2483", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:34:00.892122"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "state": "SUCCESS", "task_id": "9b92bca03e7e4328a80d07d6c5562fa0", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:34:00.892240"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "e660d9ee-82a7-4f5c-9027-6d81829d0164", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:00.893785"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "54a64885943643f9ae7b0c0e4c951c13", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.899696"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "ad17463f61ee40d4a568c7951e79ad16", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.900112"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "ab81ae13b6ee4308bc4cdabbf8a0234c", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.900537"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "9afe34039a934b0baf53596512ee2483", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:34:00.901744"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "2dafb85e-1554-4922-beb6-8456e5adc2df", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:34:00.910762"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "64109bc1484241cd9f01989c1b22846a", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.922301"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "f10dd8eb717a4f7fb00e8fa61b8b4825", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.922809"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "b3432958cc4d45939e605fde447b77bf", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.923463"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "2dafb85e15544922beb68456e5adc2df", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:34:00.924104"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "807aa61f-b79a-464d-9ec4-0bd7e030d5a8", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:34:00.926158"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 192, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-e660d9ee82a74f5c90276d81829d0164", "timestamp": "2026-04-25T06:34:00.927220"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 192, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-e660d9ee82a74f5c90276d81829d0164", "timestamp": "2026-04-25T06:34:00.931425"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "state": "SUCCESS", "task_id": "e660d9ee82a74f5c90276d81829d0164", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:00.933245"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "307eeedb665740c9bbb6373462d4a253", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.934878"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "eaa61d6b-21f1-472c-b29f-4059571acaf2", "task_name": "save_reputation", "timestamp": "2026-04-25T06:34:00.935792"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "a178d3360c1441209b53230c58fdde9f", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.936162"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "ec6a0f3503b24ac6a99e5d629b3119f3", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T06:34:00.937499"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "807aa61fb79a464d9ec40bd7e030d5a8", "task_name": "event_notification_handler", "timestamp": "2026-04-25T06:34:00.938273"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "d8db59fc-13a9-4cee-8dc6-3a8cff4e1859", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:00.939175"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-d8db59fc13a94cee8dc63a8cff4e1859", "timestamp": "2026-04-25T06:34:00.970792"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "d8db59fc13a94cee8dc63a8cff4e1859", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:00.975979"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "d4066ecc-6e9f-4955-9728-44382ff49d07", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:00.977762"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "state": "SUCCESS", "task_id": "eaa61d6b21f1472cb29f4059571acaf2", "task_name": "save_reputation", "timestamp": "2026-04-25T06:34:00.980576"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "68989cca-e909-4ddb-b31e-852a012d939b", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:00.983438"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-d4066ecc6e9f4955972844382ff49d07", "timestamp": "2026-04-25T06:34:01.007851"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "d4066ecc6e9f4955972844382ff49d07", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.010230"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 192, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-68989ccae9094ddbb31e852a012d939b", "timestamp": "2026-04-25T06:34:01.011024"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "54a64885-9436-43f9-ae7b-0c0e4c951c13", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.012318"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 192, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-68989ccae9094ddbb31e852a012d939b", "timestamp": "2026-04-25T06:34:01.014056"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "state": "SUCCESS", "task_id": "68989ccae9094ddbb31e852a012d939b", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.016501"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "ad17463f-61ee-40d4-a568-c7951e79ad16", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.018596"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-54a64885943643f9ae7b0c0e4c951c13", "timestamp": "2026-04-25T06:34:01.034727"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "54a64885943643f9ae7b0c0e4c951c13", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.038222"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "ab81ae13-b6ee-4308-bc4c-dabbf8a0234c", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.039544"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 192, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-ad17463f61ee40d4a568c7951e79ad16", "timestamp": "2026-04-25T06:34:01.039835"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "state": "SUCCESS", "task_id": "ad17463f61ee40d4a568c7951e79ad16", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.041228"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "64109bc1-4842-41cd-9f01-989c1b22846a", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.042059"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-ab81ae13b6ee4308bc4cdabbf8a0234c", "timestamp": "2026-04-25T06:34:01.060927"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 192, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-64109bc1484241cd9f01989c1b22846a", "timestamp": "2026-04-25T06:34:01.064287"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "state": "SUCCESS", "task_id": "64109bc1484241cd9f01989c1b22846a", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.067263"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-ab81ae13b6ee4308bc4cdabbf8a0234c", "timestamp": "2026-04-25T06:34:01.067344"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "f10dd8eb-717a-4f7f-b00e-8fa61b8b4825", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.068817"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "ab81ae13b6ee4308bc4cdabbf8a0234c", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.069626"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "b3432958-cc4d-4593-9e60-5fde447b77bf", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.071902"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-b3432958cc4d45939e605fde447b77bf", "timestamp": "2026-04-25T06:34:01.105408"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 192, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-f10dd8eb717a4f7fb00e8fa61b8b4825", "timestamp": "2026-04-25T06:34:01.106138"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "state": "SUCCESS", "task_id": "f10dd8eb717a4f7fb00e8fa61b8b4825", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.107745"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "307eeedb-6657-40c9-bbb6-373462d4a253", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.109111"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-b3432958cc4d45939e605fde447b77bf", "timestamp": "2026-04-25T06:34:01.109155"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "b3432958cc4d45939e605fde447b77bf", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.111050"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "task_id": "a178d336-0c14-4120-9b53-230c58fdde9f", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.113370"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 192, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-307eeedb665740c9bbb6373462d4a253", "timestamp": "2026-04-25T06:34:01.130089"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "state": "SUCCESS", "task_id": "307eeedb665740c9bbb6373462d4a253", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.131701"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "task_id": "ec6a0f35-03b2-4ac6-a99e-5d629b3119f3", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.132739"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 175, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-a178d3360c1441209b53230c58fdde9f", "timestamp": "2026-04-25T06:34:01.133101"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 175, "schema_name": "public", "state": "SUCCESS", "task_id": "a178d3360c1441209b53230c58fdde9f", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.134498"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 192, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-ec6a0f3503b24ac6a99e5d629b3119f3", "timestamp": "2026-04-25T06:34:01.154532"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 192, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-ec6a0f3503b24ac6a99e5d629b3119f3", "timestamp": "2026-04-25T06:34:01.157022"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 192, "schema_name": "public", "state": "SUCCESS", "task_id": "ec6a0f3503b24ac6a99e5d629b3119f3", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T06:34:01.158014"}
+{"event": "TenantAwareScheduler: Sending due task blueprints_v1_cleanup (authentik.blueprints.v1.tasks.clear_failed_blueprints) to all tenants", "level": "info", "logger": "tenant_schemas_celery.scheduler", "timestamp": 1777098900.0161986}
+
+----------------------------------------------------
+LOGS FOR: platform-authentik-server
+----------------------------------------------------
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/root/config/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "127.0.0.1", "request_id": "d79ce245bbf742c7a5f0c2fd3596b7d3", "runtime": 21, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:17.128427", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"domain_url": null, "event": "/ws/outpost/fc2b750f-30d5-4a2d-8bcb-4ca5223d9845/", "level": "info", "logger": "authentik.asgi", "pid": 123, "remote": "127.0.0.1", "schema_name": "public", "scheme": "ws", "timestamp": "2026-04-25T06:33:17.138724", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"Successfully connected websocket","level":"info","logger":"authentik.outpost.ak-ws","outpost":"fc2b750f-30d5-4a2d-8bcb-4ca5223d9845","timestamp":"2026-04-25T06:33:17Z"}
+{"event":"Starting Brand TLS Checker","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T06:33:17Z"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T06:33:17Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "127.0.0.1", "request_id": "973ff9fb65ed405ba05cb814804cd6ec", "runtime": 15, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:17.277340", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "127.0.0.1", "request_id": "c845d0bf6b6a4d4ea2c475f301647dfa", "runtime": 33, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:17.459943", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"Starting authentik outpost","hash":"tagged","level":"info","logger":"authentik.outpost","timestamp":"2026-04-25T06:33:17Z","version":"2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "127.0.0.1", "request_id": "8cf102b8460d44ecbb08a680bdb8fb24", "runtime": 26, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:17.494706", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T06:33:17Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "127.0.0.1", "request_id": "8690d5e5b6da4bf482cbe1d5e723b5fa", "runtime": 15, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:17.519135", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "127.0.0.1", "request_id": "d2625f845b5541ea90d12a4965ea5d8a", "runtime": 43, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:26.769663", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "127.0.0.1", "request_id": "f0146257bf9743a187a57a7576b4f291", "runtime": 18, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:26.808018", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T06:33:26Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "127.0.0.1", "request_id": "d3477b0005db4f24933773298d5df8b1", "runtime": 16, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:26.832076", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "/", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "HEAD", "pid": 125, "remote": "172.67.74.168", "request_id": "1e32e2da109e45f8930a424fa8bbf228", "runtime": 28, "schema_name": "public", "scheme": "https", "status": 302, "timestamp": "2026-04-25T06:33:30.089600", "user": "", "user_agent": "curl/8.7.1"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "127.0.0.1", "request_id": "1e4cf020f9d7460abdb73b1074255722", "runtime": 42, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:31.910480", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "127.0.0.1", "request_id": "a90ffc98dfab4e4b9ef8285205ee8bc3", "runtime": 30, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:31.950651", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T06:33:31Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "127.0.0.1", "request_id": "470f6668cb454817bdb67560cd288e5e", "runtime": 10, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:31.971529", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "127.0.0.1", "request_id": "e58a5c6a0f074d7fbe0849df84c9723f", "runtime": 42, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:37.060913", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "127.0.0.1", "request_id": "029bb5fae9024d7eb22df1c61a9d7fd6", "runtime": 38, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:37.116631", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T06:33:37Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "127.0.0.1", "request_id": "bc537f3948344e9fbd37cc88f78728a1", "runtime": 14, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:37.158475", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "127.0.0.1", "request_id": "7f835ff873dc4af7a6b3df33cdd50535", "runtime": 46, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:42.270225", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "127.0.0.1", "request_id": "5bb205d038e143648d7905e6c7cee800", "runtime": 21, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:42.302381", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T06:33:42Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "127.0.0.1", "request_id": "59a4e086309146288105f5c6d886ea58", "runtime": 19, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:42.328956", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "unauthenticated", "domain_url": "localhost", "event": "/-/health/live/", "host": "localhost:8000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "255.255.255.255", "request_id": "b402cb0cded2470280f208ff9aa12272", "runtime": 22, "schema_name": "public", "scheme": "http", "status": 204, "timestamp": "2026-04-25T06:33:47.128726", "user": "", "user_agent": "goauthentik.io/router/healthcheck"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "127.0.0.1", "request_id": "1d27b4fe9f43466da03344509d80edf7", "runtime": 29, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:47.393061", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "127.0.0.1", "request_id": "8ad85d94f067465eba0b5a9be9231857", "runtime": 22, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:47.423536", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T06:33:47Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "127.0.0.1", "request_id": "9223557bf57047b295a80f6dd4b74bcb", "runtime": 22, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:47.463004", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "/if/flow/initial-setup/", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "172.67.74.168", "request_id": "d34338a02d4a4d77b47e4b0cc2acd87d", "runtime": 36, "schema_name": "public", "scheme": "https", "status": 200, "timestamp": "2026-04-25T06:33:48.605189", "user": "", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/authentik.css","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"1.275","scheme":"http","size":3526,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/flow/FlowInterface.js?version=2024.2.2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"0.497","scheme":"http","size":166,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/custom.css","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"1.371","scheme":"http","size":24,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/standalone/loading/index.js?version=2024.2.2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"2.941","scheme":"http","size":48354,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/flow/locale-en-DooEh9Zz.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"12.834","scheme":"http","size":97372,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/standalone/loading/api-tBS34Xuf.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"3.712","scheme":"http","size":78411,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/flow/FlowInterface-rAdB7lO9.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"17.921","scheme":"http","size":333196,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/flow/api-BHvZxMjI.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"18.061","scheme":"http","size":339537,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/standalone/loading/vendor-Biglt-kt.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"11.117","scheme":"http","size":215895,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/poly.js?version=2024.2.2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"36.229","scheme":"http","size":400919,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/assets/images/flow_background.jpg","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"28.224","scheme":"http","size":716145,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/flow/vendor-DrRUEw1U.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"69.107","scheme":"http","size":1599729,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/custom.css","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"0.094","scheme":"http","size":24,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/if/flow/initial-setup/assets/fonts/RedHatText/RedHatText-Regular.woff2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"2.401","scheme":"http","size":28169,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/custom.css","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"0.282","scheme":"http","size":24,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/assets/icons/icon_left_brand.svg","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"0.338","scheme":"http","size":4861,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/if/flow/initial-setup/assets/fonts/RedHatDisplay/RedHatDisplay-Medium.woff2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"3.821","scheme":"http","size":28661,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"domain_url": null, "event": "/ws/client/", "level": "info", "logger": "authentik.asgi", "pid": 124, "remote": "172.67.74.168", "schema_name": "public", "scheme": "ws", "timestamp": "2026-04-25T06:33:48.782648", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/assets/images/flow_background.jpg","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"37.106","scheme":"http","size":716145,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/assets/icons/icon.png","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"1.184","scheme":"http","size":12892,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/assets/icons/icon.png","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"13.722","scheme":"http","size":12892,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "/api/v3/flows/executor/initial-setup/?query=", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "172.67.74.168", "request_id": "26e1bd89401d440999922e18aeacd38f", "runtime": 136, "schema_name": "public", "scheme": "https", "status": 200, "timestamp": "2026-04-25T06:33:48.933120", "user": "", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/flow/PromptStage-BqN6iL_7.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"2.301","scheme":"http","size":25310,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/if/flow/initial-setup/assets/fonts/RedHatText/RedHatText-Medium.woff2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"1.231","scheme":"http","size":29049,"status":200,"timestamp":"2026-04-25T06:33:48Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "127.0.0.1", "request_id": "fa24c48d42e342d0861b7315143b3e69", "runtime": 25, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:52.519130", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "127.0.0.1", "request_id": "baa906b46dc346679ce6cee895b8bc3d", "runtime": 18, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:52.546470", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T06:33:52Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "127.0.0.1", "request_id": "21e43e502c5447dcb20fdcc265492338", "runtime": 10, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T06:33:52.564611", "user": "ak-outpost-fc2b750f30d54a2d8bcb4ca5223d9845", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "/api/v3/flows/executor/initial-setup/?query=", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "POST", "pid": 123, "remote": "172.67.74.168", "request_id": "7d6d9cb0a9bb4485a944130d99a94451", "runtime": 64, "schema_name": "public", "scheme": "https", "status": 302, "timestamp": "2026-04-25T06:34:00.529984", "user": "", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"action": "password_set", "auth_via": "unauthenticated", "client_ip": "255.255.255.255", "context": {}, "domain_url": "auth.local.test", "event": "Created Event", "host": "auth.local.test", "level": "info", "logger": "authentik.events.models", "pid": 123, "request_id": "8346b819c7a746809132597217eeda34", "schema_name": "public", "timestamp": "2026-04-25T06:34:00.579261", "user": {"email": "admin@local.host", "pk": 4, "username": "akadmin"}}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "Task published", "host": "auth.local.test", "level": "info", "logger": "authentik.root.celery", "pid": 123, "request_id": "8346b819c7a746809132597217eeda34", "schema_name": "public", "task_id": "231782109eec4fa8bbf3758bbc72474b", "task_name": "authentik.events.tasks.event_notification_handler", "timestamp": "2026-04-25T06:34:00.596962"}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "discarding key", "host": "auth.local.test", "key": "password_repeat", "level": "info", "logger": "authentik.flows.stage", "pid": 123, "request_id": "8346b819c7a746809132597217eeda34", "schema_name": "public", "stage": "default-password-change-write", "stage_view": "authentik.stages.user_write.stage.UserWriteStageView", "timestamp": "2026-04-25T06:34:00.742166"}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "discarding key", "host": "auth.local.test", "key": "oobe-header-text", "level": "info", "logger": "authentik.flows.stage", "pid": 123, "request_id": "8346b819c7a746809132597217eeda34", "schema_name": "public", "stage": "default-password-change-write", "stage_view": "authentik.stages.user_write.stage.UserWriteStageView", "timestamp": "2026-04-25T06:34:00.742368"}
+{"action": "model_updated", "auth_via": "unauthenticated", "client_ip": "172.67.74.168", "context": {"asn": {"as_org": "CLOUDFLARENET", "asn": 13335, "network": "172.67.0.0/16"}, "geo": {"city": "", "continent": "NA", "country": "US", "lat": 37.751, "long": -97.822}, "http_request": {"args": {}, "method": "GET", "path": "/api/v3/flows/executor/initial-setup/", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}, "model": {"app": "authentik_core", "model_name": "user", "name": "authentik Default Admin", "pk": 4}}, "domain_url": "auth.local.test", "event": "Created Event", "host": "auth.local.test", "level": "info", "logger": "authentik.events.models", "pid": 123, "request_id": "8346b819c7a746809132597217eeda34", "schema_name": "public", "timestamp": "2026-04-25T06:34:00.749236", "user": {"email": "", "is_anonymous": true, "pk": 1, "username": "AnonymousUser"}}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "Task published", "host": "auth.local.test", "level": "info", "logger": "authentik.root.celery", "pid": 123, "request_id": "8346b819c7a746809132597217eeda34", "schema_name": "public", "task_id": "9b92bca03e7e4328a80d07d6c5562fa0", "task_name": "authentik.events.tasks.event_notification_handler", "timestamp": "2026-04-25T06:34:00.750503"}
+{"action": "user_write", "auth_via": "unauthenticated", "client_ip": "172.67.74.168", "context": {"asn": {"as_org": "CLOUDFLARENET", "asn": 13335, "network": "172.67.0.0/16"}, "created": false, "email": "admin@local.host", "geo": {"city": "", "continent": "NA", "country": "US", "lat": 37.751, "long": -97.822}, "http_request": {"args": {}, "method": "GET", "path": "/api/v3/flows/executor/initial-setup/", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}, "oobe-header-text": "Welcome to authentik! Please set a password for the default admin user, akadmin.", "password": "********************", "password_repeat": "********************"}, "domain_url": "auth.local.test", "event": "Created Event", "host": "auth.local.test", "level": "info", "logger": "authentik.events.models", "pid": 123, "request_id": "8346b819c7a746809132597217eeda34", "schema_name": "public", "timestamp": "2026-04-25T06:34:00.764825", "user": {"email": "admin@local.host", "pk": 4, "username": "akadmin"}}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "Task published", "host": "auth.local.test", "level": "info", "logger": "authentik.root.celery", "pid": 123, "request_id": "8346b819c7a746809132597217eeda34", "schema_name": "public", "task_id": "9afe34039a934b0baf53596512ee2483", "task_name": "authentik.events.tasks.event_notification_handler", "timestamp": "2026-04-25T06:34:00.766725"}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "/api/v3/flows/executor/initial-setup/?query=", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "172.67.74.168", "request_id": "8346b819c7a746809132597217eeda34", "runtime": 218, "schema_name": "public", "scheme": "https", "status": 302, "timestamp": "2026-04-25T06:34:00.770940", "user": "", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"action": "login", "auth_via": "unauthenticated", "client_ip": "172.67.74.168", "context": {"asn": {"as_org": "CLOUDFLARENET", "asn": 13335, "network": "172.67.0.0/16"}, "geo": {"city": "", "continent": "NA", "country": "US", "lat": 37.751, "long": -97.822}, "http_request": {"args": {}, "method": "GET", "path": "/api/v3/flows/executor/initial-setup/", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}}, "domain_url": "auth.local.test", "event": "Created Event", "host": "auth.local.test", "level": "info", "logger": "authentik.events.models", "pid": 123, "request_id": "46358eca3d72451c86d8f3f239697400", "schema_name": "public", "timestamp": "2026-04-25T06:34:00.807997", "user": {"email": "admin@local.host", "pk": 4, "username": "akadmin"}}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "Task published", "host": "auth.local.test", "level": "info", "logger": "authentik.root.celery", "pid": 123, "request_id": "46358eca3d72451c86d8f3f239697400", "schema_name": "public", "task_id": "2dafb85e15544922beb68456e5adc2df", "task_name": "authentik.events.tasks.event_notification_handler", "timestamp": "2026-04-25T06:34:00.813935"}
+{"action": "model_updated", "auth_via": "unauthenticated", "client_ip": "172.67.74.168", "context": {"asn": {"as_org": "CLOUDFLARENET", "asn": 13335, "network": "172.67.0.0/16"}, "geo": {"city": "", "continent": "NA", "country": "US", "lat": 37.751, "long": -97.822}, "http_request": {"args": {}, "method": "GET", "path": "/api/v3/flows/executor/initial-setup/", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}, "model": {"app": "authentik_core", "model_name": "user", "name": "authentik Default Admin", "pk": 4}}, "domain_url": "auth.local.test", "event": "Created Event", "host": "auth.local.test", "level": "info", "logger": "authentik.events.models", "pid": 123, "request_id": "46358eca3d72451c86d8f3f239697400", "schema_name": "public", "timestamp": "2026-04-25T06:34:00.817625", "user": {"email": "", "is_anonymous": true, "pk": 1, "username": "AnonymousUser"}}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "Task published", "host": "auth.local.test", "level": "info", "logger": "authentik.root.celery", "pid": 123, "request_id": "46358eca3d72451c86d8f3f239697400", "schema_name": "public", "task_id": "807aa61fb79a464d9ec40bd7e030d5a8", "task_name": "authentik.events.tasks.event_notification_handler", "timestamp": "2026-04-25T06:34:00.819138"}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "Task published", "host": "auth.local.test", "level": "info", "logger": "authentik.root.celery", "pid": 123, "request_id": "46358eca3d72451c86d8f3f239697400", "schema_name": "public", "task_id": "eaa61d6b21f1472cb29f4059571acaf2", "task_name": "authentik.policies.reputation.tasks.save_reputation", "timestamp": "2026-04-25T06:34:00.820145"}
+{"auth_via": "unauthenticated", "domain_url": "auth.local.test", "event": "/api/v3/flows/executor/initial-setup/?query=", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "172.67.74.168", "request_id": "46358eca3d72451c86d8f3f239697400", "runtime": 34, "schema_name": "public", "scheme": "https", "status": 200, "timestamp": "2026-04-25T06:34:00.822930", "user": "akadmin", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"auth_via": "session", "domain_url": "auth.local.test", "event": "/", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "172.67.74.168", "request_id": "673a22328f3b40fda26ff22b41736b1c", "runtime": 7, "schema_name": "public", "scheme": "https", "status": 302, "timestamp": "2026-04-25T06:34:00.868912", "user": "akadmin", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"auth_via": "session", "domain_url": "auth.local.test", "event": "/if/user/", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "172.67.74.168", "request_id": "93a87e62d54a47b2863eeec2b4a4bb94", "runtime": 46, "schema_name": "public", "scheme": "https", "status": 200, "timestamp": "2026-04-25T06:34:00.931958", "user": "akadmin", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/custom.css","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"4.264","scheme":"http","size":24,"status":200,"timestamp":"2026-04-25T06:34:00Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/user/UserInterface.js?version=2024.2.2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"4.496","scheme":"http","size":190,"status":200,"timestamp":"2026-04-25T06:34:00Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/custom.css","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"4.613","scheme":"http","size":24,"status":200,"timestamp":"2026-04-25T06:34:00Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/user/locale-en-BHVOEYci.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"9.461","scheme":"http","size":97372,"status":200,"timestamp":"2026-04-25T06:34:00Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/user/UserInterface-CWcZMWuk.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"14.480","scheme":"http","size":422212,"status":200,"timestamp":"2026-04-25T06:34:00Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/if/user/assets/fonts/RedHatText/RedHatText-Regular.woff2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"5.346","scheme":"http","size":28169,"status":200,"timestamp":"2026-04-25T06:34:00Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/user/api-Bis46C75.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"19.562","scheme":"http","size":432215,"status":200,"timestamp":"2026-04-25T06:34:00Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/user/vendor-Bi-XtfcO.js","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"76.236","scheme":"http","size":2147576,"status":200,"timestamp":"2026-04-25T06:34:01Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/static/dist/custom.css","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"0.116","scheme":"http","size":24,"status":200,"timestamp":"2026-04-25T06:34:01Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/if/user/assets/fonts/RedHatText/RedHatText-Medium.woff2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"0.489","scheme":"http","size":29049,"status":200,"timestamp":"2026-04-25T06:34:01Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/if/user/assets/fonts/webfonts/fa-solid-900.woff2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"5.598","scheme":"http","size":79100,"status":200,"timestamp":"2026-04-25T06:34:01Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"domain_url": null, "event": "/ws/client/", "level": "info", "logger": "authentik.asgi", "pid": 123, "remote": "172.67.74.168", "schema_name": "public", "scheme": "ws", "timestamp": "2026-04-25T06:34:01.093593", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"auth_via": "session", "domain_url": "auth.local.test", "event": "/api/v3/enterprise/license/summary/", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "172.67.74.168", "request_id": "81f10bb9fc094580b7b281a9b2ec6a5a", "runtime": 24, "schema_name": "public", "scheme": "https", "status": 200, "timestamp": "2026-04-25T06:34:01.140167", "user": "akadmin", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"auth_via": "session", "domain_url": "auth.local.test", "event": "/api/v3/core/users/me/", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "172.67.74.168", "request_id": "f4c7473307d84e278ece9bffe0048ea6", "runtime": 244, "schema_name": "public", "scheme": "https", "status": 200, "timestamp": "2026-04-25T06:34:01.341723", "user": "akadmin", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"event":"/if/user/assets/fonts/RedHatDisplay/RedHatDisplay-Medium.woff2","host":"auth.local.test","level":"info","logger":"authentik.router","method":"GET","remote":"172.67.74.168","runtime":"0.266","scheme":"http","size":28661,"status":200,"timestamp":"2026-04-25T06:34:01Z","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"auth_via": "session", "domain_url": "auth.local.test", "event": "/api/v3/events/notifications/?ordering=-created&page_size=1&seen=false&user=4", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 123, "remote": "172.67.74.168", "request_id": "6ac8c561ea2e42ca8006758fa234b893", "runtime": 16, "schema_name": "public", "scheme": "https", "status": 200, "timestamp": "2026-04-25T06:34:01.397031", "user": "akadmin", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"auth_via": "session", "domain_url": "auth.local.test", "event": "/api/v3/core/applications/", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "172.67.74.168", "request_id": "9c47e86ddfe1476eadc1387499e51052", "runtime": 17, "schema_name": "public", "scheme": "https", "status": 200, "timestamp": "2026-04-25T06:34:01.400150", "user": "akadmin", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"auth_via": "session", "domain_url": "auth.local.test", "event": "/api/v3/events/notifications/?ordering=-created&seen=false&user=4", "host": "auth.local.test", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 125, "remote": "172.67.74.168", "request_id": "d78c4be7d73a43199c5c9f820421abb5", "runtime": 24, "schema_name": "public", "scheme": "https", "status": 200, "timestamp": "2026-04-25T06:34:01.407122", "user": "akadmin", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"}
+{"auth_via": "unauthenticated", "domain_url": "localhost", "event": "/-/health/live/", "host": "localhost:8000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "255.255.255.255", "request_id": "1e40e6b5acaa4040a7438851c87e51b3", "runtime": 15, "schema_name": "public", "scheme": "http", "status": 204, "timestamp": "2026-04-25T06:34:17.175868", "user": "", "user_agent": "goauthentik.io/router/healthcheck"}
+{"auth_via": "unauthenticated", "domain_url": "localhost", "event": "/-/health/live/", "host": "localhost:8000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 124, "remote": "255.255.255.255", "request_id": "1f489b2b149b48bc959ecd9b228d0607", "runtime": 15, "schema_name": "public", "scheme": "http", "status": 204, "timestamp": "2026-04-25T06:34:47.174324", "user": "", "user_agent": "goauthentik.io/router/healthcheck"}
+
+----------------------------------------------------
+LOGS FOR: platform-traefik
+----------------------------------------------------
+time="2026-04-25T06:32:37Z" level=info msg="Configuration loaded from flags."
+time="2026-04-25T06:32:40Z" level=error msg="Unable to obtain ACME certificate for domains \"traefik.local.test\": cannot get ACME client acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-acct :: urn:ietf:params:acme:error:invalidContact :: Error validating contact(s) :: contact email has forbidden domain \"example.com\"" rule="Host(`traefik.local.test`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=traefik@docker
+time="2026-04-25T06:32:51Z" level=error msg="Unable to obtain ACME certificate for domains \"traefik.local.test\": cannot get ACME client acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-acct :: urn:ietf:params:acme:error:invalidContact :: Error validating contact(s) :: contact email has forbidden domain \"example.com\"" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=traefik@docker rule="Host(`traefik.local.test`)"
+time="2026-04-25T06:32:52Z" level=error msg="Unable to obtain ACME certificate for domains \"app.local.test\": cannot get ACME client acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-acct :: urn:ietf:params:acme:error:invalidContact :: Error validating contact(s) :: contact email has forbidden domain \"example.com\"" ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=nocobase@docker rule="Host(`app.local.test`)" providerName=letsencrypt.acme
+time="2026-04-25T06:33:15Z" level=error msg="Unable to obtain ACME certificate for domains \"traefik.local.test\": cannot get ACME client acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-acct :: urn:ietf:params:acme:error:invalidContact :: Error validating contact(s) :: contact email has forbidden domain \"example.com\"" rule="Host(`traefik.local.test`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=traefik@docker
+time="2026-04-25T06:33:17Z" level=error msg="Unable to obtain ACME certificate for domains \"auth.local.test\": cannot get ACME client acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-acct :: urn:ietf:params:acme:error:invalidContact :: Error validating contact(s) :: contact email has forbidden domain \"example.com\"" ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=authentik@docker rule="Host(`auth.local.test`)" providerName=letsencrypt.acme
+time="2026-04-25T06:33:19Z" level=error msg="Unable to obtain ACME certificate for domains \"app.local.test\": cannot get ACME client acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-acct :: urn:ietf:params:acme:error:invalidContact :: Error validating contact(s) :: contact email has forbidden domain \"example.com\"" ACME CA="https://acme-v02.api.letsencrypt.org/directory" rule="Host(`app.local.test`)" routerName=nocobase@docker providerName=letsencrypt.acme
+
+----------------------------------------------------
+LOGS FOR: platform-redis
+----------------------------------------------------
+
+----------------------------------------------------
+LOGS FOR: platform-postgres
+----------------------------------------------------
+
+initdb: warning: enabling "trust" authentication for local connections
+initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+waiting for server to start....2026-04-25 06:32:38.065 UTC [41] LOG:  starting PostgreSQL 16.13 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+2026-04-25 06:32:38.067 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-04-25 06:32:38.068 UTC [44] LOG:  database system was shut down at 2026-04-25 06:32:37 UTC
+2026-04-25 06:32:38.072 UTC [41] LOG:  database system is ready to accept connections
+ done
+server started
+
+/usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init-db.sql
+CREATE DATABASE
+CREATE DATABASE
+DO
+GRANT
+GRANT
+ALTER DATABASE
+ALTER DATABASE
+You are now connected to database "authentik" as user "postgres".
+GRANT
+You are now connected to database "nocobase" as user "postgres".
+GRANT
+
+
+waiting for server to shut down....2026-04-25 06:32:38.215 UTC [41] LOG:  received fast shutdown request
+2026-04-25 06:32:38.216 UTC [41] LOG:  aborting any active transactions
+2026-04-25 06:32:38.217 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+2026-04-25 06:32:38.217 UTC [42] LOG:  shutting down
+2026-04-25 06:32:38.218 UTC [42] LOG:  checkpoint starting: shutdown immediate
+2026-04-25 06:32:38.253 UTC [42] LOG:  checkpoint complete: wrote 1855 buffers (11.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.018 s, sync=0.017 s, total=0.036 s; sync files=604, longest=0.006 s, average=0.001 s; distance=8551 kB, estimate=8551 kB; lsn=0/1D4C368, redo lsn=0/1D4C368
+2026-04-25 06:32:38.256 UTC [41] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+2026-04-25 06:32:38.325 UTC [1] LOG:  starting PostgreSQL 16.13 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+2026-04-25 06:32:38.325 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-04-25 06:32:38.325 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-04-25 06:32:38.326 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-04-25 06:32:38.328 UTC [59] LOG:  database system was shut down at 2026-04-25 06:32:38 UTC
+2026-04-25 06:32:38.350 UTC [1] LOG:  database system is ready to accept connections
+2026-04-25 06:32:49.580 UTC [72] WARNING:  there is already a transaction in progress
+2026-04-25 06:32:49.597 UTC [73] WARNING:  there is already a transaction in progress
+2026-04-25 06:32:51.827 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:51.827 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."schema_name" = 'public' LIMIT 21 FOR UPDATE
+2026-04-25 06:32:51.828 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:51.828 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:51.873 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:51.873 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:51.874 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:51.874 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:51.898 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:51.898 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:51.919 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:51.919 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:51.925 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:51.925 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:51.975 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:51.975 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:51.986 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:51.986 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.182 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.182 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.183 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.183 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.191 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.191 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.198 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.198 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.199 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.199 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.200 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.200 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.201 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.201 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.201 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.201 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.217 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.217 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.218 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.218 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.219 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.219 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.220 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.220 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.225 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.225 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:32:52.226 UTC [74] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 06:32:52.226 UTC [74] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 06:33:32.235 UTC [401] ERROR:  deadlock detected
+2026-04-25 06:33:32.235 UTC [401] DETAIL:  Process 401 waits for ShareLock on transaction 3233; blocked by process 405.
+	Process 405 waits for ShareLock on transaction 3229; blocked by process 401.
+	Process 401: UPDATE "authentik_flows_stage" SET "name" = 'default-authentication-login' WHERE "authentik_flows_stage"."stage_uuid" = '7dfe2f06cf084f1a90b083a944386f6b'::uuid
+	Process 405: UPDATE "authentik_flows_stage" SET "name" = 'default-password-change-write' WHERE "authentik_flows_stage"."stage_uuid" = 'a207b4ad902f4fa4bd9fc2beea7c6a73'::uuid
+2026-04-25 06:33:32.235 UTC [401] HINT:  See server log for query details.
+2026-04-25 06:33:32.235 UTC [401] CONTEXT:  while updating tuple (0,114) in relation "authentik_flows_stage"
+2026-04-25 06:33:32.235 UTC [401] STATEMENT:  UPDATE "authentik_flows_stage" SET "name" = 'default-authentication-login' WHERE "authentik_flows_stage"."stage_uuid" = '7dfe2f06cf084f1a90b083a944386f6b'::uuid
+2026-04-25 06:33:32.255 UTC [401] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2026-04-25 06:33:32.255 UTC [401] STATEMENT:  SET search_path = 'public'
+
+--- [8] DOCKER NETWORKS ---
+342f4db840b3   proxy               bridge    local

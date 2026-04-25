@@ -1,0 +1,17 @@
+services:
+  # Base configuration for all services
+  base-service:
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - proxy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  proxy:
+    external: true
