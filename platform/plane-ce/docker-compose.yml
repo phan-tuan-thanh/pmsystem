@@ -6,7 +6,6 @@ services:
     image: makeplane/plane-backend:latest
     container_name: platform-plane-backend
     restart: unless-stopped
-    command: ./bin/docker-entrypoint-api.sh
     environment:
       # Core Configuration
       DJANGO_SETTINGS_MODULE: plane.settings.production
@@ -77,7 +76,6 @@ services:
     image: makeplane/plane-worker:latest
     container_name: platform-plane-worker
     restart: unless-stopped
-    command: ./bin/docker-entrypoint-worker.sh
     environment:
       # Core Configuration
       DJANGO_SETTINGS_MODULE: plane.settings.production
@@ -127,7 +125,6 @@ services:
     image: makeplane/plane-worker:latest
     container_name: platform-plane-beat
     restart: unless-stopped
-    command: ./bin/docker-entrypoint-beat.sh
     environment:
       # Core Configuration
       DJANGO_SETTINGS_MODULE: plane.settings.production
