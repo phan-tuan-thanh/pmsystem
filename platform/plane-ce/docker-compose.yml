@@ -62,9 +62,6 @@ services:
       ADMIN_PASSWORD: ${PLANE_ADMIN_PASSWORD}
     networks:
       - proxy
-    depends_on:
-      - platform-postgres
-      - platform-redis
     volumes:
       # Mount logs directory
       - ./logs/backend:/app/logs
@@ -122,8 +119,6 @@ services:
       - proxy
     depends_on:
       - plane-backend
-      - platform-postgres
-      - platform-redis
     volumes:
       - ./logs/worker:/app/logs
 
@@ -166,8 +161,6 @@ services:
       - proxy
     depends_on:
       - plane-backend
-      - platform-postgres
-      - platform-redis
     volumes:
       - ./logs/beat:/app/logs
 
@@ -251,9 +244,6 @@ services:
       SECRET_KEY: ${PLANE_SECRET_KEY}
     networks:
       - proxy
-    depends_on:
-      - platform-postgres
-      - platform-redis
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-live.entrypoints=websecure"

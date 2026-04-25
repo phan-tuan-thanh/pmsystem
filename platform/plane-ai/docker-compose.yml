@@ -39,9 +39,6 @@ services:
       LOG_LEVEL: INFO
     networks:
       - proxy
-    depends_on:
-      - platform-redis
-      - platform-postgres
     volumes:
       - ./logs:/app/logs
     healthcheck:
