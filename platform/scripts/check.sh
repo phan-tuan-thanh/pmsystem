@@ -19,7 +19,14 @@ CONTAINERS=(
     "platform-traefik"
     "platform-authentik-server"
     "platform-authentik-worker"
-    "platform-nocobase"
+    "platform-plane-backend"
+    "platform-plane-worker"
+    "platform-plane-beat"
+    "platform-plane-frontend"
+    "platform-plane-space"
+    "platform-plane-admin"
+    "platform-plane-live"
+    "platform-plane-ai"
 )
 
 ALL_HEALTHY=true
@@ -96,7 +103,9 @@ check_endpoint() {
 # Check based on .env DOMAIN (Testing HTTPS since we have global redirection)
 check_endpoint "https://traefik.$DOMAIN/dashboard/" "Traefik Dashboard"
 check_endpoint "https://auth.$DOMAIN" "Authentik Login"
-check_endpoint "https://app.$DOMAIN" "NocoBase"
+check_endpoint "https://app.$DOMAIN" "Plane CE"
+check_endpoint "https://app.$DOMAIN/api/health/" "Plane CE API"
+check_endpoint "https://ai.$DOMAIN/health/" "Plane AI Service"
 
 echo "----------------------------------------------------"
 if [ "$ALL_HEALTHY" = true ]; then

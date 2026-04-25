@@ -54,17 +54,20 @@ wait_for_healthy platform-redis
 echo "Starting Authentik..."
 docker compose -p $COMPOSE_PROJECT_NAME --env-file .env -f authentik/docker-compose.yml up -d
 
-echo "Starting NocoBase..."
-docker compose -p $COMPOSE_PROJECT_NAME --env-file .env -f nocobase/docker-compose.yml up -d
+echo "Starting Plane CE..."
+docker compose -p $COMPOSE_PROJECT_NAME --env-file .env -f plane-ce/docker-compose.yml up -d
 
-# Wait for NocoBase HTTP server to be up before considering deployment complete
-echo "Waiting for NocoBase to be ready..."
-RETRIES=30
-until curl -k -s -o /dev/null -w "%{http_code}" "https://app.$DOMAIN" | grep -qE "^(200|302|401)"; do
+echo "Starting Plane AI Service..."
+docker compose -p $COMPOSE_PROJECT_NAME --env-file .env -f plane-ai/docker-compose.yml up -d
+
+# Wait for Plane CE HTTP server to be up before considering deployment complete
+echo "Waiting for Plane CE to be ready..."
+RETRIES=60
+until curl -k -s -o /dev/null -w "%{http_code}" "https://app.$DOMAIN/api/health/" | grep -qE "^(200|302)"; do
     RETRIES=$((RETRIES - 1))
     if [ "$RETRIES" -le 0 ]; then
         echo ""
-        echo "⚠️  NocoBase did not become ready in time. Check logs with: ./scripts/logs.sh nocobase"
+        echo "⚠️  Plane CE did not become ready in time. Check logs with: ./scripts/logs.sh plane-backend"
         break
     fi
     echo -n "."
@@ -75,8 +78,9 @@ echo ""
 echo "✅ Deployment complete!"
 echo ""
 echo "Access your services at:"
-echo "  NocoBase  : https://app.$DOMAIN"
+echo "  Plane CE  : https://app.$DOMAIN"
+echo "  Plane AI  : https://ai.$DOMAIN"
 echo "  Authentik : https://auth.$DOMAIN"
 echo "  Traefik   : https://traefik.$DOMAIN/dashboard/"
 echo ""
-echo "Default NocoBase credentials: $NOCOBASE_ADMIN_EMAIL / $NOCOBASE_ADMIN_PASSWORD"
+echo "Default Plane CE credentials: $PLANE_ADMIN_EMAIL / $PLANE_ADMIN_PASSWORD"

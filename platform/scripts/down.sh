@@ -10,7 +10,8 @@ if [ -f .env ]; then
 fi
 
 echo "Stopping all services in project: $COMPOSE_PROJECT_NAME..."
-docker compose -p $COMPOSE_PROJECT_NAME --env-file .env -f nocobase/docker-compose.yml down
+docker compose -p $COMPOSE_PROJECT_NAME --env-file .env -f plane-ai/docker-compose.yml down
+docker compose -p $COMPOSE_PROJECT_NAME --env-file .env -f plane-ce/docker-compose.yml down
 docker compose -p $COMPOSE_PROJECT_NAME --env-file .env -f authentik/docker-compose.yml down
 docker compose -p $COMPOSE_PROJECT_NAME --env-file .env -f traefik/docker-compose.yml down
 docker compose -p $COMPOSE_PROJECT_NAME --env-file .env -f redis/docker-compose.yml down
