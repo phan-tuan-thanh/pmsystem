@@ -15,13 +15,24 @@ fi
 
 # Check if hostnames are mapped in /etc/hosts (crucial for local dev)
 if [ ! -z "$DOMAIN" ]; then
-    # Check if the domain is mapped to 127.0.0.1
-    if ! grep -q "traefik.$DOMAIN" /etc/hosts; then
-        echo "Hostname traefik.$DOMAIN is not found in /etc/hosts."
-        # We only auto-run setup if it looks like a local domain or user wants it
-        # For now, let's just ask or check if it's a non-public domain
+    # Check if key hostnames are mapped to 127.0.0.1
+    REQUIRED_HOSTS=("traefik.$DOMAIN" "app.$DOMAIN" "ai.$DOMAIN")
+    MISSING_HOSTS=false
+
+    for HOST in "${REQUIRED_HOSTS[@]}"; do
+        if ! grep -q "^127.0.0.1.*$HOST" /etc/hosts; then
+            echo "❌ Hostname $HOST not found in /etc/hosts"
+            MISSING_HOSTS=true
+        fi
+    done
+
+    if [ "$MISSING_HOSTS" = true ]; then
+        echo ""
+        echo "⚠️  Some required hostnames are missing from /etc/hosts"
         echo "Attempting to update /etc/hosts automatically..."
         sudo ./scripts/setup-hosts.sh
+    else
+        echo "✓ All required hostnames found in /etc/hosts"
     fi
 fi
 
