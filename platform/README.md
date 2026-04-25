@@ -1,6 +1,6 @@
 # Platform Self-Hosted Infrastructure
 
-A production-ready, modular self-hosted platform using Traefik, Authentik, and NocoBase.
+A production-ready, modular self-hosted platform using Traefik, Authentik, and Plane CE with AI support (replacing NocoBase).
 
 ## 🚀 Quick Start
 
@@ -32,7 +32,7 @@ sudo ./scripts/setup-hosts.sh
 
 | Service | URL | Default Credentials |
 | :--- | :--- | :--- |
-| **NocoBase** | [https://app.local.test](https://app.local.test) | `admin@nocobase.com` / `nocobase` |
+| **Plane CE** | [https://app.local.test](https://app.local.test) | `admin@planece.com` / `planece` |
 | **Authentik** | [https://auth.local.test](https://auth.local.test) | Setup at [/if/flow/initial-setup/](https://auth.local.test/if/flow/initial-setup/) |
 | **Traefik Dash** | [https://traefik.local.test](https://traefik.local.test) | `admin` / `password` |
 
@@ -46,7 +46,7 @@ All scripts are located in the `scripts/` directory and can be run from any fold
 *   `./scripts/down.sh`: Stop and remove all containers.
 *   `./scripts/remove.sh`: PERMANENTLY remove all containers and data volumes.
 *   `./scripts/check.sh`: Verify system health and endpoint reachability.
-*   `./scripts/logs.sh <app>`: Follow logs for a specific service (e.g., `nocobase`).
+*   `./scripts/logs.sh <app>`: Follow logs for a specific service (e.g., `plane-ce`).
 *   `./scripts/backup.sh`: Create a timestamped backup of databases and media.
 *   `./scripts/debug.sh`: Generate a comprehensive diagnostic report.
 
@@ -60,7 +60,7 @@ All scripts are located in the `scripts/` directory and can be run from any fold
 ├── scripts/             # Management scripts
 ├── traefik/             # Reverse Proxy & SSL
 ├── authentik/           # Identity Provider (SSO)
-├── nocobase/            # Business Platform
+├── plane-ce/            # Business Platform
 ├── postgres/            # Shared Database
 └── redis/               # Shared Cache
 ```

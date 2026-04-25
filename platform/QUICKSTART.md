@@ -50,14 +50,14 @@ Authentik requires a one-time initial setup to create the administrator account.
 2. Follow the on-screen instructions to set a password for the `akadmin` user.
 3. This account will be your master "Identity" login.
 
-### 2. Login to NocoBase (Business Platform)
-NocoBase sử dụng tài khoản được cấu hình trong file `.env` (các biến `NOCOBASE_ADMIN_EMAIL` và `NOCOBASE_ADMIN_PASSWORD`).
+### 2. Login to Plane CE (Business Platform)
+Plane CE sử dụng tài khoản được cấu hình trong file `.env` (các biến `PLANE_CE_ADMIN_EMAIL` và `PLANE_CE_ADMIN_PASSWORD`).
 1. Go to: **[https://app.local.test](https://app.local.test)**
 2. Enter the default credentials:
-   - **Email**: `admin@nocobase.com` *(configured in `.env` → `NOCOBASE_ADMIN_EMAIL`)*
-   - **Password**: `nocobase` *(configured in `.env` → `NOCOBASE_ADMIN_PASSWORD`)*
+   - **Email**: `admin@planece.com` *(configured in `.env` → `PLANE_CE_ADMIN_EMAIL`)*
+   - **Password**: `planece` *(configured in `.env` → `PLANE_CE_ADMIN_PASSWORD`)*
 3. Once logged in, go to **Profile Settings** and change your password immediately.
-4. Also update `NOCOBASE_ADMIN_PASSWORD` in `.env` to match.
+4. Also update `PLANE_CE_ADMIN_PASSWORD` in `.env` to match.
 
 ### 3. View Traefik Dashboard (Infrastructure Monitor)
 To see how your traffic is being routed:
@@ -73,5 +73,5 @@ To see how your traffic is being routed:
 - **Wipe everything (Delete data)**: `./scripts/remove.sh`
 - **Start everything**: `./scripts/up.sh`
 - **Check status**: `./scripts/check.sh`
-- **View logs**: `./scripts/logs.sh nocobase`
+- **View logs**: `./scripts/logs.sh plane-ce`
 - **Create backup**: `./scripts/backup.sh`

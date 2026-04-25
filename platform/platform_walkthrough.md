@@ -1,6 +1,6 @@
 # Self-Hosted Platform Walkthrough
 
-This project provides a production-ready, modular self-hosted infrastructure using Traefik as a reverse proxy, Authentik for identity management, and NocoBase as the business platform.
+This project provides a production-ready, modular self-hosted infrastructure using Traefik as a reverse proxy, Authentik for identity management, and Plane CE with AI as the business platform.
 
 ## Project Structure
 
@@ -28,9 +28,9 @@ This project provides a production-ready, modular self-hosted infrastructure usi
 ├── authentik/
 │   ├── docker-compose.yml
 │   └── media/                  # Authentik media files
-└── nocobase/
+└── plane-ce/
     ├── docker-compose.yml
-    └── data/                   # NocoBase application data
+    └── data/                   # Plane CE application data
 ```
 
 ## Key Features
@@ -67,7 +67,7 @@ Once the deployment is complete, run the health check script to ensure everythin
 You can access the following services:
 - **Traefik Dashboard**: `http://traefik.local.test` (or `https://traefik.yourdomain.com`)
 - **Authentik**: `http://auth.local.test` (or `https://auth.yourdomain.com`)
-- **NocoBase**: `http://app.local.test` (or `https://app.yourdomain.com`)
+- **Plane CE**: `http://app.local.test` (or `https://app.yourdomain.com`)
 
 ## Management Commands
 

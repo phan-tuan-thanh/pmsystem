@@ -4,7 +4,7 @@ Thiết kế cấu trúc hạ tầng self-hosted với các yêu cầu:
 
 Dùng Traefik làm reverse proxy + SSL + routing
 Dùng Authentik làm SSO / Identity Provider
-Dùng NocoBase là ứng dụng business platform
+Dùng Plane CE + AI làm ứng dụng business platform thay cho NocoBase
 Mỗi ứng dụng có compose file riêng
 Các cấu hình chung dùng lại để dễ quản lý
 Dễ thêm app mới sau này
@@ -26,7 +26,7 @@ Kiến trúc mong muốn
 │   ├── docker-compose.yml
 │   └── media/
 │
-│── nocobase/
+│── plane-ce/
 │   ├── docker-compose.yml
 │   └── data/
 │
@@ -48,7 +48,7 @@ Ví dụ:
 
 traefik/docker-compose.yml
 authentik/docker-compose.yml
-nocobase/docker-compose.yml
+plane-ce/docker-compose.yml
 
 Để deploy riêng lẻ:
 
@@ -115,12 +115,12 @@ B. Postgres dùng chung
 1 container postgres phục vụ:
 
 authentik DB
-nocobase DB
+plane-ce DB
 
 Yêu cầu tạo nhiều DB init script:
 
 authentik
-nocobase
+plane-ce
 C. Redis dùng chung
 
 Redis phục vụ:
@@ -139,7 +139,7 @@ worker
 dùng postgres
 dùng redis
 persist media
-E. NocoBase
+E. Plane CE + AI
 
 Domain:
 
@@ -147,9 +147,10 @@ app.example.com
 
 Yêu cầu:
 
-dùng postgres riêng DB nocobase
-sau này tích hợp SSO qua Authentik
-Routing yêu cầu Traefik labels
+- Dùng Postgres với schema riêng cho Plane CE
+- Tích hợp SSO qua Authentik
+- Triển khai một service AI hỗ trợ trong ứng dụng và data model
+- Routing yêu cầu Traefik labels
 
 Mỗi compose phải có labels chuẩn:
 
@@ -166,7 +167,7 @@ postgres
 redis
 traefik
 authentik
-nocobase
+plane-ce
 down.sh
 
 Stop toàn bộ
@@ -183,7 +184,7 @@ Backup:
 
 postgres dump
 volume media
-nocobase data
+plane-ce data
 Yêu cầu output của agent
 Sinh đầy đủ:
 File tree
@@ -194,7 +195,7 @@ traefik/docker-compose.yml
 postgres/docker-compose.yml
 redis/docker-compose.yml
 authentik/docker-compose.yml
-nocobase/docker-compose.yml
+plane-ce/docker-compose.yml
 scripts/*.sh
 Kèm hướng dẫn deploy:
 docker network create proxy

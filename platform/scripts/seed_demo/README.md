@@ -1,5 +1,7 @@
 # Hướng Dẫn Tạo Dữ Liệu Demo Agile — NocoBase
 
+> Lưu ý: Đây là tài liệu demo cho NocoBase cũ. Dự án hiện đang chuyển sang Plane CE + AI nên nội dung này chỉ dùng để tham chiếu hoặc chuyển đổi dữ liệu.
+
 ## Tổng Quan
 
 Script tự động tạo bộ dữ liệu demo quản lý dự án Agile trực tiếp vào NocoBase qua REST API — không cần thao tác thủ công trên giao diện.
