@@ -1,11 +1,30 @@
 version: "3.8"
 
 services:
+  # RabbitMQ (Celery broker for Plane CE)
+  plane-rabbitmq:
+    image: rabbitmq:3.13-alpine
+    container_name: platform-plane-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-plane}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-PlaneRabbit123!}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST:-plane}
+    networks:
+      - proxy
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
   # Plane Backend API
   plane-backend:
     image: makeplane/plane-backend:latest
     container_name: platform-plane-backend
     restart: unless-stopped
+    command: ./bin/docker-entrypoint-api.sh
     ports:
       - "8000"
     environment:
@@ -13,7 +32,8 @@ services:
       ENVIRONMENT: production
       DJANGO_SETTINGS_MODULE: plane.settings.production
 
-      # Database
+      # Database (connection string + individual vars)
+      DATABASE_URL: postgresql://${PLANE_POSTGRES_USER:-plane_ce}:${PLANE_POSTGRES_PASSWORD:-PlanePass123!}@platform-postgres:5432/${PLANE_POSTGRES_DB:-plane_ce}
       DATABASE_ENGINE: django.db.backends.postgresql
       DATABASE_HOST: platform-postgres
       DATABASE_NAME: ${PLANE_POSTGRES_DB:-plane_ce}
@@ -30,6 +50,13 @@ services:
       REDIS_HOST: platform-redis
       REDIS_PORT: 6379
       REDIS_URL: redis://platform-redis:6379
+
+      # RabbitMQ (Celery broker)
+      RABBITMQ_HOST: platform-plane-rabbitmq
+      RABBITMQ_PORT: "5672"
+      RABBITMQ_USER: ${RABBITMQ_USER:-plane}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-PlaneRabbit123!}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST:-plane}
 
       # Security
       SECRET_KEY: ${PLANE_SECRET_KEY:-ReplaceWithLongRandomKeyForPlane789!}
@@ -56,13 +83,15 @@ services:
       EMAIL_USE_TLS: ${SMTP_USE_TLS:-true}
       EMAIL_FROM_USER: ${SMTP_FROM:-noreply@plane.local}
 
-      # File Storage (Local or S3/MinIO)
-      USE_S3: "1"
-      AWS_STORAGE_BUCKET_NAME: ${AWS_S3_BUCKET_NAME:-plane-files}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-minioadmin}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-minioadmin}
-      AWS_S3_ENDPOINT_URL: ${AWS_S3_ENDPOINT_URL:-http://platform-minio:9000}
-      AWS_S3_REGION_NAME: ${AWS_S3_REGION_NAME:-us-east-1}
+      # File Storage — local disk (MinIO not used)
+      USE_S3: "0"
+      AWS_S3_BUCKET_NAME: ""
+      AWS_ACCESS_KEY_ID: ""
+      AWS_SECRET_ACCESS_KEY: ""
+      AWS_S3_ENDPOINT_URL: ""
+
+      # Gunicorn
+      GUNICORN_WORKERS: "2"
 
       # Logging
       LOG_LEVEL: INFO
@@ -70,12 +99,15 @@ services:
     networks:
       - proxy
     depends_on:
-      - plane-migration
+      plane-migration:
+        condition: service_completed_successfully
+      plane-rabbitmq:
+        condition: service_healthy
     volumes:
       - ./logs:/app/logs
       - ./data:/app/data
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health/"]
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:8000/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -84,24 +116,21 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-api.entrypoints=websecure"
       - "traefik.http.routers.plane-api.rule=Host(`app.${DOMAIN}`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.plane-api.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.plane-api.tls=true"
+      - "traefik.http.routers.plane-api.priority=10"
       - "traefik.http.services.plane-api.loadbalancer.server.port=8000"
 
   # Database Migration Service (runs once on startup)
   plane-migration:
     image: makeplane/plane-backend:latest
     container_name: platform-plane-migration
-    command: >
-      sh -c "
-      python manage.py migrate --noinput &&
-      python manage.py collectstatic --noinput &&
-      echo 'Migration completed successfully'
-      "
+    command: ./bin/docker-entrypoint-migrator.sh
     environment:
       DEBUG: "0"
       ENVIRONMENT: production
       DJANGO_SETTINGS_MODULE: plane.settings.production
 
+      DATABASE_URL: postgresql://${PLANE_POSTGRES_USER:-plane_ce}:${PLANE_POSTGRES_PASSWORD:-PlanePass123!}@platform-postgres:5432/${PLANE_POSTGRES_DB:-plane_ce}
       DATABASE_ENGINE: django.db.backends.postgresql
       DATABASE_HOST: platform-postgres
       DATABASE_NAME: ${PLANE_POSTGRES_DB:-plane_ce}
@@ -118,10 +147,25 @@ services:
       REDIS_PORT: 6379
       REDIS_URL: redis://platform-redis:6379
 
+      RABBITMQ_HOST: platform-plane-rabbitmq
+      RABBITMQ_PORT: "5672"
+      RABBITMQ_USER: ${RABBITMQ_USER:-plane}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-PlaneRabbit123!}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST:-plane}
+
       SECRET_KEY: ${PLANE_SECRET_KEY:-ReplaceWithLongRandomKeyForPlane789!}
+
+      USE_S3: "0"
+      AWS_S3_BUCKET_NAME: ""
+      AWS_ACCESS_KEY_ID: ""
+      AWS_SECRET_ACCESS_KEY: ""
+      AWS_S3_ENDPOINT_URL: ""
 
     networks:
       - proxy
+    depends_on:
+      plane-rabbitmq:
+        condition: service_healthy
     volumes:
       - ./logs:/app/logs
       - ./data:/app/data
@@ -129,14 +173,16 @@ services:
 
   # Background Worker (Celery)
   plane-worker:
-    image: makeplane/plane-worker:latest
+    image: makeplane/plane-backend:latest
     container_name: platform-plane-worker
     restart: unless-stopped
+    command: ./bin/docker-entrypoint-worker.sh
     environment:
       DEBUG: "0"
       ENVIRONMENT: production
       DJANGO_SETTINGS_MODULE: plane.settings.production
 
+      DATABASE_URL: postgresql://${PLANE_POSTGRES_USER:-plane_ce}:${PLANE_POSTGRES_PASSWORD:-PlanePass123!}@platform-postgres:5432/${PLANE_POSTGRES_DB:-plane_ce}
       DATABASE_ENGINE: django.db.backends.postgresql
       DATABASE_HOST: platform-postgres
       DATABASE_NAME: ${PLANE_POSTGRES_DB:-plane_ce}
@@ -148,39 +194,42 @@ services:
       REDIS_PORT: 6379
       REDIS_URL: redis://platform-redis:6379
 
+      RABBITMQ_HOST: platform-plane-rabbitmq
+      RABBITMQ_PORT: "5672"
+      RABBITMQ_USER: ${RABBITMQ_USER:-plane}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-PlaneRabbit123!}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST:-plane}
+
       SECRET_KEY: ${PLANE_SECRET_KEY:-ReplaceWithLongRandomKeyForPlane789!}
 
       SITE_URL: https://app.${DOMAIN:-local.test}
 
-      USE_S3: "1"
-      AWS_STORAGE_BUCKET_NAME: ${AWS_S3_BUCKET_NAME:-plane-files}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-minioadmin}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-minioadmin}
-      AWS_S3_ENDPOINT_URL: ${AWS_S3_ENDPOINT_URL:-http://platform-minio:9000}
+      USE_S3: "0"
+      AWS_S3_BUCKET_NAME: ""
+      AWS_ACCESS_KEY_ID: ""
+      AWS_SECRET_ACCESS_KEY: ""
+      AWS_S3_ENDPOINT_URL: ""
 
     networks:
       - proxy
     depends_on:
-      - plane-backend
+      plane-migration:
+        condition: service_completed_successfully
     volumes:
       - ./logs:/app/logs
-    healthcheck:
-      test: ["CMD", "celery", "-A", "plane", "inspect", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
 
   # Celery Beat (Scheduler)
   plane-beat:
-    image: makeplane/plane-worker:latest
+    image: makeplane/plane-backend:latest
     container_name: platform-plane-beat
     restart: unless-stopped
+    command: ./bin/docker-entrypoint-beat.sh
     environment:
       DEBUG: "0"
       ENVIRONMENT: production
       DJANGO_SETTINGS_MODULE: plane.settings.production
 
+      DATABASE_URL: postgresql://${PLANE_POSTGRES_USER:-plane_ce}:${PLANE_POSTGRES_PASSWORD:-PlanePass123!}@platform-postgres:5432/${PLANE_POSTGRES_DB:-plane_ce}
       DATABASE_ENGINE: django.db.backends.postgresql
       DATABASE_HOST: platform-postgres
       DATABASE_NAME: ${PLANE_POSTGRES_DB:-plane_ce}
@@ -192,6 +241,12 @@ services:
       REDIS_PORT: 6379
       REDIS_URL: redis://platform-redis:6379
 
+      RABBITMQ_HOST: platform-plane-rabbitmq
+      RABBITMQ_PORT: "5672"
+      RABBITMQ_USER: ${RABBITMQ_USER:-plane}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-PlaneRabbit123!}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST:-plane}
+
       SECRET_KEY: ${PLANE_SECRET_KEY:-ReplaceWithLongRandomKeyForPlane789!}
 
       SITE_URL: https://app.${DOMAIN:-local.test}
@@ -199,7 +254,8 @@ services:
     networks:
       - proxy
     depends_on:
-      - plane-backend
+      plane-migration:
+        condition: service_completed_successfully
     volumes:
       - ./logs:/app/logs
 
@@ -208,7 +264,10 @@ services:
     image: makeplane/plane-frontend:latest
     container_name: platform-plane-frontend
     restart: unless-stopped
+    command: node /app/web/server.js
     environment:
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
       NEXT_PUBLIC_API_BASE_URL: https://app.${DOMAIN:-local.test}/api
       NEXT_PUBLIC_WEB_URL: https://app.${DOMAIN:-local.test}
       NEXT_PUBLIC_ADMIN_BASE_URL: https://admin.${DOMAIN:-local.test}
@@ -221,7 +280,7 @@ services:
     ports:
       - "3000"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:3000/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -229,8 +288,9 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-frontend.entrypoints=websecure"
-      - "traefik.http.routers.plane-frontend.rule=Host(`app.${DOMAIN}`) && Path(`/`)"
-      - "traefik.http.routers.plane-frontend.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.plane-frontend.rule=Host(`app.${DOMAIN}`) && PathPrefix(`/`)"
+      - "traefik.http.routers.plane-frontend.tls=true"
+      - "traefik.http.routers.plane-frontend.priority=1"
       - "traefik.http.services.plane-frontend.loadbalancer.server.port=3000"
 
   # Public Space (Shared Views)
@@ -238,7 +298,10 @@ services:
     image: makeplane/plane-space:latest
     container_name: platform-plane-space
     restart: unless-stopped
+    command: node /app/space/server.js
     environment:
+      PORT: "3001"
+      HOSTNAME: "0.0.0.0"
       NEXT_PUBLIC_API_BASE_URL: https://app.${DOMAIN:-local.test}/api
       NEXT_PUBLIC_WEB_URL: https://app.${DOMAIN:-local.test}
 
@@ -249,7 +312,7 @@ services:
     ports:
       - "3001"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3001/"]
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:3001/spaces/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -258,7 +321,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-space.entrypoints=websecure"
       - "traefik.http.routers.plane-space.rule=Host(`space.${DOMAIN}`)"
-      - "traefik.http.routers.plane-space.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.plane-space.tls=true"
       - "traefik.http.services.plane-space.loadbalancer.server.port=3001"
 
   # Admin Panel
@@ -266,7 +329,10 @@ services:
     image: makeplane/plane-admin:latest
     container_name: platform-plane-admin
     restart: unless-stopped
+    command: node /app/admin/server.js
     environment:
+      PORT: "3002"
+      HOSTNAME: "0.0.0.0"
       NEXT_PUBLIC_API_BASE_URL: https://app.${DOMAIN:-local.test}/api
       NEXT_PUBLIC_WEB_URL: https://app.${DOMAIN:-local.test}
       NEXT_PUBLIC_ADMIN_BASE_URL: https://admin.${DOMAIN:-local.test}
@@ -278,7 +344,7 @@ services:
     ports:
       - "3002"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3002/"]
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:3002/god-mode/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -287,7 +353,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-admin.entrypoints=websecure"
       - "traefik.http.routers.plane-admin.rule=Host(`admin.${DOMAIN}`)"
-      - "traefik.http.routers.plane-admin.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.plane-admin.tls=true"
       - "traefik.http.services.plane-admin.loadbalancer.server.port=3002"
 
   # Real-time WebSocket Server
@@ -295,7 +361,9 @@ services:
     image: makeplane/plane-live:latest
     container_name: platform-plane-live
     restart: unless-stopped
+    command: node /app/live/dist/server.js
     environment:
+      PORT: "3003"
       DATABASE_HOST: platform-postgres
       DATABASE_NAME: ${PLANE_POSTGRES_DB:-plane_ce}
       DATABASE_USER: ${PLANE_POSTGRES_USER:-plane_ce}
@@ -314,7 +382,7 @@ services:
     ports:
       - "3003"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3003/"]
+      test: ["CMD", "node", "-e", "require('net').createConnection(3003,'127.0.0.1').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -323,7 +391,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-live.entrypoints=websecure"
       - "traefik.http.routers.plane-live.rule=Host(`app.${DOMAIN}`) && PathPrefix(`/ws`)"
-      - "traefik.http.routers.plane-live.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.plane-live.tls=true"
       - "traefik.http.services.plane-live.loadbalancer.server.port=3003"
 
 networks:

@@ -1,0 +1,707 @@
+====================================================
+PLATFORM DEBUG REPORT
+Timestamp: Sat Apr 25 23:52:37 +07 2026
+Project: platform
+====================================================
+
+--- [1] SYSTEM INFORMATION ---
+OS: Linux codespaces-515692 6.8.0-1044-azure #50~22.04.1-Ubuntu SMP Wed Dec  3 15:13:22 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+Docker Version: 29.3.0-1
+Docker Compose Version: Docker Compose version v2.40.3
+
+--- [2] DIRECTORY STRUCTURE ---
+.:
+HOSTS_CONFIGURATION.md
+OFFICIAL_SETUP_GUIDE.md
+PLANE_CE_SETUP.md
+PLANE_STARTUP_GUIDE.md
+QUICKSTART.md
+README.md
+SETUP_VERIFICATION.md
+authentik
+compose.shared.yml
+debug_report_20260425_133506.log
+debug_report_20260425_235237.log
+plane-ai
+plane-ce
+platform_walkthrough.md
+postgres
+redis
+scripts
+traefik
+
+./authentik:
+certs
+custom-templates
+docker-compose.yml
+media
+
+./authentik/certs:
+
+./authentik/custom-templates:
+
+./authentik/media:
+public
+
+./authentik/media/public:
+
+./plane-ai:
+Dockerfile
+README.md
+docker-compose.yml
+logs
+main.py
+requirements.txt
+
+./plane-ai/logs:
+
+./plane-ce:
+data
+docker-compose.yml
+logs
+
+./plane-ce/data:
+
+./plane-ce/logs:
+backend
+beat
+worker
+
+./plane-ce/logs/backend:
+
+./plane-ce/logs/beat:
+
+./plane-ce/logs/worker:
+
+./postgres:
+docker-compose.yml
+init-db.sql
+
+./redis:
+docker-compose.yml
+
+./scripts:
+backup.sh
+check.sh
+debug.sh
+down.sh
+logs.sh
+remove.sh
+seed_demo
+seed_demo_plane_ce
+setup-hosts.sh
+up.sh
+
+./scripts/seed_demo:
+README.md
+config.py
+requirements.txt
+run_all.py
+scenarios.py
+schema_setup.py
+seed_comments.py
+seed_projects.py
+seed_sprints.py
+seed_tasks.py
+seed_users.py
+setup_permissions.py
+setup_ui.py
+
+./scripts/seed_demo_plane_ce:
+README.md
+api_client.py
+config.py
+requirements.txt
+run_all.py
+
+./traefik:
+docker-compose.yml
+dynamic
+letsencrypt
+
+./traefik/dynamic:
+
+./traefik/letsencrypt:
+acme.json
+
+--- [3] ENVIRONMENT CONFIGURATION (Masked) ---
+# Global Config
+DOMAIN=local.test
+TZ=Asia/Ho_Chi_Minh
+COMPOSE_PROJECT_NAME=platform
+STACK_NAME=platform
+
+# Traefik
+TRAEFIK_EMAIL=admin@local.test
+
+# Database (Postgres)
+POSTGRES_USER=postgres
+POSTGRES_DB=postgres
+
+# Authentik
+AUTHENTIK_ERROR_REPORTING__ENABLED=false
+# Database for Authentik
+AUTHENTIK_POSTGRES_DB=authentik
+AUTHENTIK_POSTGRES_USER=authentik
+
+# Plane CE
+PLANE_POSTGRES_DB=plane_ce
+PLANE_POSTGRES_USER=plane_ce
+PLANE_ADMIN_EMAIL=admin@plane.local
+
+# AWS S3 / MinIO (for file uploads in Plane CE)
+AWS_S3_BUCKET_NAME=plane-files
+AWS_S3_ENDPOINT_URL=http://platform-minio:9000
+AWS_S3_REGION_NAME=us-east-1
+
+# Email/SMTP (optional, for Plane CE notifications)
+SMTP_HOST=localhost
+SMTP_PORT=587
+SMTP_USER=noreply@plane.local
+SMTP_USE_TLS=true
+SMTP_FROM=noreply@plane.local
+
+# Plane AI Service
+PLANE_AI_SERVICE_TOKEN=test-token-for-development
+PLANE_AI_DB=plane_ai
+PLANE_AI_POSTGRES_USER=plane_ai
+OPENAI_API_BASE=https://api.openai.com/v1
+LLM_MODEL=gpt-3.5-turbo
+
+--- [4] HOSTS MAPPING ---
+127.0.0.1 traefik.local.test
+127.0.0.1 auth.local.test
+127.0.0.1 app.local.test
+127.0.0.1 space.local.test
+127.0.0.1 admin.local.test
+127.0.0.1 ai.local.test
+
+--- [5] DOCKER CONTAINER STATUS ---
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED         STATUS                          PORTS                                                                          NAMES
+5be96fcb6d7d   platform-plane-ai                     "python -m uvicorn m…"   3 minutes ago   Up 3 minutes (healthy)                                                                                         platform-plane-ai
+dd5fe03c4bb9   makeplane/plane-frontend:latest       "docker-entrypoint.s…"   3 minutes ago   Restarting (0) 5 seconds ago                                                                                   platform-plane-frontend
+7946d148bb01   makeplane/plane-space:latest          "docker-entrypoint.s…"   3 minutes ago   Restarting (0) 9 seconds ago                                                                                   platform-plane-space
+0927e2432393   makeplane/plane-admin:latest          "docker-entrypoint.s…"   3 minutes ago   Restarting (0) 4 seconds ago                                                                                   platform-plane-admin
+98850e8cab57   makeplane/plane-live:latest           "docker-entrypoint.s…"   3 minutes ago   Restarting (0) 7 seconds ago                                                                                   platform-plane-live
+1d8cde98fdf1   makeplane/plane-worker:latest         "python3"                3 minutes ago   Restarting (0) 8 seconds ago                                                                                   platform-plane-beat
+5e784d65076f   makeplane/plane-worker:latest         "python3"                3 minutes ago   Restarting (0) 4 seconds ago                                                                                   platform-plane-worker
+656f12f4fd59   makeplane/plane-backend:latest        "python3"                3 minutes ago   Restarting (0) 11 seconds ago                                                                                  platform-plane-backend
+038af7e18527   makeplane/plane-backend:latest        "sh -c ' python mana…"   3 minutes ago   Exited (1) 2 minutes ago                                                                                       platform-plane-migration
+1424d10073a1   ghcr.io/goauthentik/server:2024.2.2   "dumb-init -- ak wor…"   3 minutes ago   Up 3 minutes (healthy)                                                                                         platform-authentik-worker
+730a2f5d9f1c   ghcr.io/goauthentik/server:2024.2.2   "dumb-init -- ak ser…"   3 minutes ago   Up 3 minutes (healthy)                                                                                         platform-authentik-server
+d98982203eac   traefik:v2.11                         "/entrypoint.sh --gl…"   3 minutes ago   Up 3 minutes                    0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp   platform-traefik
+a32d05f4c3f3   redis:7-alpine                        "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes (healthy)          6379/tcp                                                                       platform-redis
+668cbafbccdb   postgres:16-alpine                    "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes (healthy)          5432/tcp                                                                       platform-postgres
+
+--- [6] CONTAINER HEALTH HISTORY ---
+
+Container: platform-plane-ai
+Status: running, Health: healthy, ExitCode: 0, Error: 
+
+Container: platform-plane-frontend
+Status: restarting, Health: unhealthy, ExitCode: 0, Error: 
+
+Container: platform-plane-space
+Status: restarting, Health: unhealthy, ExitCode: 0, Error: 
+
+Container: platform-plane-admin
+Status: restarting, Health: unhealthy, ExitCode: 0, Error: 
+
+Container: platform-plane-live
+Status: restarting, Health: unhealthy, ExitCode: 0, Error: 
+
+Container: platform-plane-beat
+
+
+Container: platform-plane-worker
+Status: restarting, Health: unhealthy, ExitCode: 0, Error: 
+
+Container: platform-plane-backend
+Status: restarting, Health: unhealthy, ExitCode: 0, Error: 
+
+Container: platform-plane-migration
+
+
+Container: platform-authentik-worker
+Status: running, Health: healthy, ExitCode: 0, Error: 
+
+Container: platform-authentik-server
+Status: running, Health: healthy, ExitCode: 0, Error: 
+
+Container: platform-traefik
+
+
+Container: platform-redis
+Status: running, Health: healthy, ExitCode: 0, Error: 
+
+Container: platform-postgres
+Status: running, Health: healthy, ExitCode: 0, Error: 
+
+--- [7] CONTAINER LOGS (Last 100 lines each) ---
+
+----------------------------------------------------
+LOGS FOR: platform-plane-ai
+----------------------------------------------------
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     127.0.0.1:32868 - "GET /health/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49946 - "GET /health/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37376 - "GET /health/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53200 - "GET /health/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40904 - "GET /health/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36604 - "GET /health/ HTTP/1.1" 200 OK
+
+----------------------------------------------------
+LOGS FOR: platform-plane-frontend
+----------------------------------------------------
+
+----------------------------------------------------
+LOGS FOR: platform-plane-space
+----------------------------------------------------
+
+----------------------------------------------------
+LOGS FOR: platform-plane-admin
+----------------------------------------------------
+
+----------------------------------------------------
+LOGS FOR: platform-plane-live
+----------------------------------------------------
+
+----------------------------------------------------
+LOGS FOR: platform-plane-beat
+----------------------------------------------------
+
+----------------------------------------------------
+LOGS FOR: platform-plane-worker
+----------------------------------------------------
+
+----------------------------------------------------
+LOGS FOR: platform-plane-backend
+----------------------------------------------------
+
+----------------------------------------------------
+LOGS FOR: platform-plane-migration
+----------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/usr/local/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/psycopg/connection.py", line 748, in connect
+    raise last_ex.with_traceback(None)
+psycopg.OperationalError: connection failed: FATAL:  password authentication failed for user "plane_ce"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/code/manage.py", line 17, in <module>
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/local/lib/python3.12/site-packages/django/core/management/base.py", line 412, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/local/lib/python3.12/site-packages/django/core/management/base.py", line 458, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/management/base.py", line 106, in wrapper
+    res = handle_func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/management/commands/migrate.py", line 117, in handle
+    executor = MigrationExecutor(connection, self.migration_progress_callback)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/migrations/executor.py", line 18, in __init__
+    self.loader = MigrationLoader(self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/migrations/loader.py", line 58, in __init__
+    self.build_graph()
+  File "/usr/local/lib/python3.12/site-packages/django/db/migrations/loader.py", line 235, in build_graph
+    self.applied_migrations = recorder.applied_migrations()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/migrations/recorder.py", line 81, in applied_migrations
+    if self.has_table():
+       ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/migrations/recorder.py", line 57, in has_table
+    with self.connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py", line 330, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "/usr/local/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py", line 288, in ensure_connection
+    with self.wrap_database_errors:
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/usr/local/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/psycopg/connection.py", line 748, in connect
+    raise last_ex.with_traceback(None)
+django.db.utils.OperationalError: connection failed: FATAL:  password authentication failed for user "plane_ce"
+
+----------------------------------------------------
+LOGS FOR: platform-authentik-worker
+----------------------------------------------------
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "3dd4804a5eb94954bf8c08c258d05aa2", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:16.770022"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "6a84985c-bbf9-49bc-b390-51999678553f", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:16.772712"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "6a84985cbbf949bcb39051999678553f", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:16.836684"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "dad3fd98-aec7-4a64-bece-cae2f7691d02", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:16.840437"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "dad3fd98aec74a64bececae2f7691d02", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:16.970916"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "f1f390bc-1eaa-493e-bdd1-ef60f1d43d8c", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:16.981454"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "03d8d3079da94385a5f0eaf4eb1b9e3e", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:17.038605"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "bcf93ae3-4345-4a35-b9cf-5220d9589b3a", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:17.047999"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "bcf93ae343454a35b9cf5220d9589b3a", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:17.186601"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "113fb91d-26f9-4f13-ada6-30d630de9ca4", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:17.194401"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "113fb91d26f94f13ada630d630de9ca4", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:17.345671"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "0b6177f8-35b2-49b7-862a-a34e1ef66a6e", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:17.350682"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "0b6177f835b249b7862aa34e1ef66a6e", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:18.814930"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "9bcc404a-3b90-45a5-84aa-84e540546c0d", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:18.816934"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "f1f390bc1eaa493ebdd1ef60f1d43d8c", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:18.886083"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "6a0d973b-8a6a-47fd-a173-75fa7c67caf0", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:18.889819"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "6a0d973b8a6a47fda17375fa7c67caf0", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:19.080430"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "ce84e622-3c18-401e-924f-e37e14b7b114", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:19.085612"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "9bcc404a3b9045a584aa84e540546c0d", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:19.103389"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "9ed58763-d453-43a6-a6b7-505d81eab173", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:19.105409"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "ce84e6223c18401e924fe37e14b7b114", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:19.240782"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "950278d4-73db-40e0-98c9-64fb99988fe4", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:19.247151"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "950278d473db40e098c964fb99988fe4", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:19.363458"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "3e380864-d9e3-42fe-9834-07d55841d4a4", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:19.367508"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "3e380864d9e342fe983407d55841d4a4", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:19.573021"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "610f44ec-e50f-4677-a9ed-4baf80344816", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:19.577405"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "610f44ece50f4677a9ed4baf80344816", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:20.310928"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "9b45e99f-2e6f-46db-8608-10d1a27bf107", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:20.313784"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "9b45e99f2e6f46db860810d1a27bf107", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:20.532076"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "d248e17c-a46d-4d78-a107-3b8c72cd242e", "task_name": "notification_transport", "timestamp": "2026-04-25T16:52:20.535694"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "d248e17ca46d4d78a1073b8c72cd242e", "task_name": "authentik.events.tasks.notification_transport", "timestamp": "2026-04-25T16:52:20.607155"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "RETRY", "task_id": "d248e17ca46d4d78a1073b8c72cd242e", "task_name": "notification_transport", "timestamp": "2026-04-25T16:52:20.613445"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "407cef01-21ab-46b1-9bce-4145fa1e91ae", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:20.622845"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "407cef0121ab46b19bce4145fa1e91ae", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:20.804978"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "f8fbd01c-119d-40b2-8095-ee53526c3a97", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:20.809741"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "f8fbd01c119d40b28095ee53526c3a97", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.287709"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "30be0bdc-9141-4d73-bcc3-70a7e07271b0", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.291698"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "30be0bdc91414d73bcc370a7e07271b0", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.454079"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "task_id": "e9abc6bb-097f-4d69-b3bc-ca26de62a042", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.458526"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "9ed58763d45343a6a6b7505d81eab173", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.575462"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "c7891515-ed7c-40a7-a682-2f5288ee9bda", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.579907"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "c7891515ed7c40a7a6822f5288ee9bda", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.648881"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "b520213c-bb48-4047-a105-0ebe9907b842", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.653983"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "b520213cbb484047a1050ebe9907b842", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.759968"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "36196fa4-089b-42cb-a6d5-260a4917765f", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.764545"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 247, "schema_name": "public", "state": "SUCCESS", "task_id": "e9abc6bb097f4d69b3bcca26de62a042", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:21.779662"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "36196fa4089b42cba6d5260a4917765f", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:22.402997"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "d248e17c-a46d-4d78-a107-3b8c72cd242e", "task_name": "notification_transport", "timestamp": "2026-04-25T16:52:22.409566"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "d248e17ca46d4d78a1073b8c72cd242e", "task_name": "authentik.events.tasks.notification_transport", "timestamp": "2026-04-25T16:52:22.461812"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "RETRY", "task_id": "d248e17ca46d4d78a1073b8c72cd242e", "task_name": "notification_transport", "timestamp": "2026-04-25T16:52:22.465889"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "f51405bb-b24c-450c-8a51-5e8d75287d08", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:22.471359"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "f51405bbb24c450c8a515e8d75287d08", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:22.581149"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "task_id": "85caa213-da71-4e15-9957-4d81670686b1", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:22.582986"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 248, "schema_name": "public", "state": "SUCCESS", "task_id": "85caa213da714e1599574d81670686b1", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:23.385093"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "task_id": "7993c41e-c8fe-4fa8-8dd9-4095e6eb9407", "task_name": "outpost_post_save", "timestamp": "2026-04-25T16:52:24.067111"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "cbffe8ca-28f1-4181-b0f4-61816b0e425b", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:24.151553"}
+{"domain_url": null, "event": "Model does not exist", "level": "warning", "logger": "authentik.outposts.tasks", "model": "<class 'authentik.brands.models.Brand'>", "pid": 261, "pk": "UUID('a83e8cff-a435-4f1d-90ba-8f5b9dc68867')", "schema_name": "public", "task_id": "task-7993c41ec8fe4fa88dd94095e6eb9407", "timestamp": "2026-04-25T16:52:24.168159"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "state": "SUCCESS", "task_id": "7993c41ec8fe4fa88dd94095e6eb9407", "task_name": "outpost_post_save", "timestamp": "2026-04-25T16:52:24.177256"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "task_id": "42fb5202-bef0-4877-abae-a9d8121d258d", "task_name": "outpost_post_save", "timestamp": "2026-04-25T16:52:24.192972"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "state": "SUCCESS", "task_id": "42fb5202bef04877abaea9d8121d258d", "task_name": "outpost_post_save", "timestamp": "2026-04-25T16:52:24.256462"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "task_id": "62aa001a-a021-42d2-8eea-b6bacf0a9d6f", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:24.267350"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "state": "SUCCESS", "task_id": "cbffe8ca28f14181b0f461816b0e425b", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:24.392586"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "fb4befae-360a-4b6a-8be9-d791fd589e61", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:24.395688"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "state": "SUCCESS", "task_id": "62aa001aa02142d28eeab6bacf0a9d6f", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:24.784891"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "task_id": "0387bbbf-2931-43f5-9306-3a36a9e001b2", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:24.793489"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "state": "SUCCESS", "task_id": "0387bbbf293143f593063a36a9e001b2", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:24.986270"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "task_id": "e9ff1f55-1a50-4f21-bacf-5914083cc0cc", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:24.988347"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "state": "SUCCESS", "task_id": "e9ff1f551a504f21bacf5914083cc0cc", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:25.107626"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "task_id": "15ce7137-fdd0-44cd-a529-75781bd84d2d", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:25.116721"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "state": "SUCCESS", "task_id": "fb4befae360a4b6a8be9d791fd589e61", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:25.137564"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "d248e17c-a46d-4d78-a107-3b8c72cd242e", "task_name": "notification_transport", "timestamp": "2026-04-25T16:52:25.140110"}
+{"action": "system_task_exception", "client_ip": null, "context": {"message": "Task notification_transport encountered an error: Traceback (most recent call last):\n  File \"/ak-root/venv/lib/python3.12/site-packages/celery/app/trace.py\", line 477, in trace_task\n    R = retval = fun(*args, **kwargs)\n                 ^^^^^^^^^^^^^^^^^^^^\n  File \"/ak-root/venv/lib/python3.12/site-packages/celery/app/trace.py\", line 760, in __protected_call__\n    return self.run(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/ak-root/venv/lib/python3.12/site-packages/celery/app/autoretry.py\", line 60, in run\n    ret = task.retry(exc=exc, **retry_kwargs)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/ak-root/venv/lib/python3.12/site-packages/celery/app/task.py\", line 736, in retry\n    raise_with_context(exc)\n  File \"/ak-root/venv/lib/python3.12/site-packages/celery/app/autoretry.py\", line 38, in run\n    return task._orig_run(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/authentik/events/tasks.py\", line 126, in notification_transport\n    raise exc\n  File \"/authentik/events/tasks.py\", line 122, in notification_transport\n    transport.send(notification)\n  File \"/authentik/events/models.py\", line 346, in send\n    return self.send_email(notification)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/authentik/events/models.py\", line 494, in send_email\n    raise NotificationTransportError(exc) from exc\nauthentik.events.models.NotificationTransportError: [Errno 111] Connection refused"}, "domain_url": null, "event": "Created Event", "level": "info", "logger": "authentik.events.models", "pid": 262, "schema_name": "public", "task_id": "task-d248e17ca46d4d78a1073b8c72cd242e", "timestamp": "2026-04-25T16:52:25.296197", "user": {}}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "state": "SUCCESS", "task_id": "15ce7137fdd044cda52975781bd84d2d", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:25.311709"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "task_id": "d671c481-84b3-4bd1-a3f1-fd37a5d21413", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:25.320295"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "0941fbed6c7e44ff807363637001e2c3", "task_name": "authentik.events.tasks.event_notification_handler", "timestamp": "2026-04-25T16:52:25.338062"}
+{"domain_url": null, "event": "Task failure", "exc": "NotificationTransportError(ConnectionRefusedError(111, 'Connection refused'))", "level": "warning", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "task-d248e17ca46d4d78a1073b8c72cd242e", "timestamp": "2026-04-25T16:52:25.339871"}
+{"event": "Task authentik.events.tasks.notification_transport[d248e17c-a46d-4d78-a107-3b8c72cd242e] raised unexpected: NotificationTransportError(ConnectionRefusedError(111, 'Connection refused'))", "exception": [{"exc_type": "NotificationTransportError", "exc_value": "[Errno 111] Connection refused", "frames": [{"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/app/trace.py", "line": "", "lineno": 477, "locals": {}, "name": "trace_task"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/app/trace.py", "line": "", "lineno": 760, "locals": {}, "name": "__protected_call__"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/app/autoretry.py", "line": "", "lineno": 60, "locals": {}, "name": "run"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/app/task.py", "line": "", "lineno": 736, "locals": {}, "name": "retry"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/app/autoretry.py", "line": "", "lineno": 38, "locals": {}, "name": "run"}, {"filename": "/authentik/events/tasks.py", "line": "", "lineno": 126, "locals": {}, "name": "notification_transport"}, {"filename": "/authentik/events/tasks.py", "line": "", "lineno": 122, "locals": {}, "name": "notification_transport"}, {"filename": "/authentik/events/models.py", "line": "", "lineno": 346, "locals": {}, "name": "send"}, {"filename": "/authentik/events/models.py", "line": "", "lineno": 494, "locals": {}, "name": "send_email"}], "is_cause": false, "syntax_error": null}, {"exc_type": "ConnectionRefusedError", "exc_value": "[Errno 111] Connection refused", "frames": [{"filename": "/authentik/events/models.py", "line": "", "lineno": 492, "locals": {"context": "\"{'key_value': {'user_email': 'root@example.com', 'user_username': 'akadmin', 'me\"+277", "key": "new_version", "mail": "<authentik.stages.email.utils.TemplateEmailMessage object at 0x7eed2d3f3860>", "notification": "'<Notification: Notification for user akadmin: Changelog: https://docs.goauthenti'+42", "self": "<NotificationTransport: Notification Transport default-email-transport>", "send_mail": "<@task: authentik.stages.email.tasks.send_mail of authentik at 0x7eed3790a990>", "subject_prefix": "authentik Notification: ", "value": "2026.2.2"}, "name": "send_email"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/local.py", "line": "", "lineno": 182, "locals": {"a": "\"({'to': ['authentik Default Admin <root@example.com>'], 'cc': [], 'bcc': [], 're\"+5907", "kw": "{}", "self": "<@task: authentik.stages.email.tasks.send_mail of authentik at 0x7eed3790a990>"}, "name": "__call__"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/app/trace.py", "line": "", "lineno": 761, "locals": {"args": "\"({'to': ['authentik Default Admin <root@example.com>'], 'cc': [], 'bcc': [], 're\"+5907", "kwargs": "{}", "orig": "<function Task.__call__ at 0x7eed38db3420>", "req": "None", "self": "<@task: authentik.stages.email.tasks.send_mail of authentik at 0x7eed3790a990>", "stack": "<celery.utils.threads._LocalStack object at 0x7eed2d631ca0>"}, "name": "__protected_call__"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/app/task.py", "line": "", "lineno": 411, "locals": {"args": "\"({'to': ['authentik Default Admin <root@example.com>'], 'cc': [], 'bcc': [], 're\"+5907", "kwargs": "{}", "self": "<@task: authentik.stages.email.tasks.send_mail of authentik at 0x7eed3790a990>"}, "name": "__call__"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/app/autoretry.py", "line": "", "lineno": 60, "locals": {"args": "\"({'to': ['authentik Default Admin <root@example.com>'], 'cc': [], 'bcc': [], 're\"+5907", "autoretry_for": "(<class 'smtplib.SMTPException'>, <class 'ConnectionError'>, <class 'OSError'>)", "dont_autoretry_for": "()", "kwargs": "{}", "retry_backoff": "1.0", "retry_backoff_max": "600", "retry_jitter": "True", "retry_kwargs": "{'countdown': 0}", "task": "<@task: authentik.stages.email.tasks.send_mail of authentik at 0x7eed3790a990>"}, "name": "run"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/app/task.py", "line": "", "lineno": 720, "locals": {"args": "None", "countdown": "0", "eta": "None", "exc": "ConnectionRefusedError(111, 'Connection refused')", "kwargs": "None", "max_retries": "3", "options": "{}", "request": "\"<Context: {'args': ({'to': ['authentik Default Admin <root@example.com>'], 'cc':\"+5959", "retries": "1", "self": "<@task: authentik.stages.email.tasks.send_mail of authentik at 0x7eed3790a990>", "throw": "True"}, "name": "retry"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/celery/app/autoretry.py", "line": "", "lineno": 38, "locals": {"args": "\"({'to': ['authentik Default Admin <root@example.com>'], 'cc': [], 'bcc': [], 're\"+5907", "autoretry_for": "(<class 'smtplib.SMTPException'>, <class 'ConnectionError'>, <class 'OSError'>)", "dont_autoretry_for": "()", "kwargs": "{}", "retry_backoff": "1.0", "retry_backoff_max": "600", "retry_jitter": "True", "retry_kwargs": "{'countdown': 0}", "task": "<@task: authentik.stages.email.tasks.send_mail of authentik at 0x7eed3790a990>"}, "name": "run"}, {"filename": "/authentik/stages/email/tasks.py", "line": "", "lineno": 105, "locals": {"backend": "<django.core.mail.backends.smtp.EmailBackend object at 0x7eed2c2e1a30>", "email_stage_pk": "None", "message": "\"{'to': ['authentik Default Admin <root@example.com>'], 'cc': [], 'bcc': [], 'rep\"+5904", "message_id": "<177713594520.262.3792036522658376738@1424d10073a1>", "self": "<@task: authentik.stages.email.tasks.send_mail of authentik at 0x7eed3790a990>", "stage": "<EmailStage: Email Stage >"}, "name": "send_mail"}, {"filename": "/authentik/stages/email/tasks.py", "line": "", "lineno": 73, "locals": {"backend": "<django.core.mail.backends.smtp.EmailBackend object at 0x7eed2c2e1a30>", "email_stage_pk": "None", "message": "\"{'to': ['authentik Default Admin <root@example.com>'], 'cc': [], 'bcc': [], 'rep\"+5904", "message_id": "<177713594520.262.3792036522658376738@1424d10073a1>", "self": "<@task: authentik.stages.email.tasks.send_mail of authentik at 0x7eed3790a990>", "stage": "<EmailStage: Email Stage >"}, "name": "send_mail"}, {"filename": "/ak-root/venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", "line": "", "lineno": 86, "locals": {"connection_params": "{'local_hostname': '1424d10073a1', 'timeout': 10}", "self": "<django.core.mail.backends.smtp.EmailBackend object at 0x7eed2c2e1a30>"}, "name": "open"}, {"filename": "/usr/local/lib/python3.12/smtplib.py", "line": "", "lineno": 255, "locals": {"host": "localhost", "local_hostname": "1424d10073a1", "port": "25", "self": "<smtplib.SMTP object at 0x7eed2c2e25d0>", "source_address": "None", "timeout": "10"}, "name": "__init__"}, {"filename": "/usr/local/lib/python3.12/smtplib.py", "line": "", "lineno": 341, "locals": {"host": "localhost", "port": "25", "self": "<smtplib.SMTP object at 0x7eed2c2e25d0>", "source_address": "None"}, "name": "connect"}, {"filename": "/usr/local/lib/python3.12/smtplib.py", "line": "", "lineno": 312, "locals": {"host": "localhost", "port": "25", "self": "<smtplib.SMTP object at 0x7eed2c2e25d0>", "timeout": "10"}, "name": "_get_socket"}, {"filename": "/usr/local/lib/python3.12/socket.py", "line": "", "lineno": 852, "locals": {"address": "('localhost', 25)", "af": "<AddressFamily.AF_INET: 2>", "all_errors": "False", "canonname": "", "exceptions": "[]", "host": "localhost", "port": "25", "proto": "6", "res": "\"(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 2\"+3", "sa": "('127.0.0.1', 25)", "sock": "<socket.socket [closed] fd=-1, family=2, type=1, proto=6>", "socktype": "<SocketKind.SOCK_STREAM: 1>", "source_address": "None", "timeout": "10"}, "name": "create_connection"}, {"filename": "/usr/local/lib/python3.12/socket.py", "line": "", "lineno": 837, "locals": {"address": "('localhost', 25)", "af": "<AddressFamily.AF_INET: 2>", "all_errors": "False", "canonname": "", "exceptions": "[]", "host": "localhost", "port": "25", "proto": "6", "res": "\"(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 2\"+3", "sa": "('127.0.0.1', 25)", "sock": "<socket.socket [closed] fd=-1, family=2, type=1, proto=6>", "socktype": "<SocketKind.SOCK_STREAM: 1>", "source_address": "None", "timeout": "10"}, "name": "create_connection"}], "is_cause": true, "syntax_error": null}], "level": "error", "logger": "celery.app.trace", "timestamp": 1777135945.3412848}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "state": "FAILURE", "task_id": "d248e17ca46d4d78a1073b8c72cd242e", "task_name": "notification_transport", "timestamp": "2026-04-25T16:52:25.357889"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "12e4bddc-5644-4bdf-a03d-a054564e9af7", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:25.375793"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "state": "SUCCESS", "task_id": "d671c48184b34bd1a3f1fd37a5d21413", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:25.474525"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "task_id": "8f5c91f3-2963-4021-ac97-6aecb5f1ea7b", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:25.478064"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "state": "SUCCESS", "task_id": "12e4bddc56444bdfa03da054564e9af7", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:25.708913"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "b99ab2f4-d032-4f7c-8eaa-cd890a82b1f6", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:25.712422"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "state": "SUCCESS", "task_id": "b99ab2f4d0324f7c8eaacd890a82b1f6", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:26.446061"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "0941fbed-6c7e-44ff-8073-63637001e2c3", "task_name": "event_notification_handler", "timestamp": "2026-04-25T16:52:26.460698"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "e7c25c12950847388c87ef46edff1745", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T16:52:26.510395"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "5e062025cf494dc699e253b9f93f0c10", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T16:52:26.515885"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "b61d6269aa94492d92527cd35a28f7a2", "task_name": "authentik.events.tasks.event_trigger_handler", "timestamp": "2026-04-25T16:52:26.518934"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "state": "SUCCESS", "task_id": "0941fbed6c7e44ff807363637001e2c3", "task_name": "event_notification_handler", "timestamp": "2026-04-25T16:52:26.522708"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "e7c25c12-9508-4738-8c87-ef46edff1745", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T16:52:26.529068"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 262, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-e7c25c12950847388c87ef46edff1745", "timestamp": "2026-04-25T16:52:26.598066"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "state": "SUCCESS", "task_id": "e7c25c12950847388c87ef46edff1745", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T16:52:26.603517"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "5e062025-cf49-4dc6-99e2-53b9f93f0c10", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T16:52:26.606453"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 262, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-5e062025cf494dc699e253b9f93f0c10", "timestamp": "2026-04-25T16:52:26.661743"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "state": "SUCCESS", "task_id": "5e062025cf494dc699e253b9f93f0c10", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T16:52:26.664421"}
+{"domain_url": null, "event": "Task started", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "task_id": "b61d6269-aa94-492d-9252-7cd35a28f7a2", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T16:52:26.669468"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 261, "schema_name": "public", "state": "SUCCESS", "task_id": "8f5c91f329634021ac976aecb5f1ea7b", "task_name": "apply_blueprint", "timestamp": "2026-04-25T16:52:26.709902"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 262, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-b61d6269aa94492d92527cd35a28f7a2", "timestamp": "2026-04-25T16:52:26.718305"}
+{"checker": "passes_action", "domain_url": null, "event": "Event matcher check result", "level": "info", "logger": "authentik.policies.event_matcher.models", "pid": 262, "result": "<PolicyResult passing=False messages=('Action matched.',)>", "schema_name": "public", "task_id": "task-b61d6269aa94492d92527cd35a28f7a2", "timestamp": "2026-04-25T16:52:26.722796"}
+{"domain_url": null, "event": "Task finished", "level": "info", "logger": "authentik.root.celery", "pid": 262, "schema_name": "public", "state": "SUCCESS", "task_id": "b61d6269aa94492d92527cd35a28f7a2", "task_name": "event_trigger_handler", "timestamp": "2026-04-25T16:52:26.724996"}
+
+----------------------------------------------------
+LOGS FOR: platform-authentik-server
+----------------------------------------------------
+{"app_name": "authentik.policies", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.policies.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:35.769912"}
+{"app_name": "authentik.providers.proxy", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.providers.proxy.tasks", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:35.789659"}
+{"app_name": "authentik.providers.proxy", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.providers.proxy.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:35.793413"}
+{"app_name": "authentik.providers.scim", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.providers.scim.tasks", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.088327"}
+{"app_name": "authentik.providers.scim", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.providers.scim.signals", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.090819"}
+{"app_name": "authentik.rbac", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.rbac.signals", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.119297"}
+{"app_name": "authentik.sources.ldap", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.sources.ldap.tasks", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.143444"}
+{"app_name": "authentik.sources.ldap", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.sources.ldap.signals", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.146987"}
+{"app_name": "authentik.sources.oauth", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.sources.oauth.tasks", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.149856"}
+/ak-root/venv/lib/python3.12/site-packages/facebook/__init__.py:99: SyntaxWarning: invalid escape sequence '\d'
+  version_regex = re.compile("^\d\.\d{1,2}$")
+{"app_name": "authentik.sources.saml", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.sources.saml.signals", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.165309"}
+{"app_name": "authentik.stages.authenticator_duo", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.stages.authenticator_duo.tasks", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.167767"}
+{"app_name": "authentik.stages.authenticator_static", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.stages.authenticator_static.signals", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.169696"}
+{"app_name": "authentik.stages.email", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.stages.email.tasks", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.171108"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "5307f1424cea4efd8c821ca1194b3b72", "task_name": "authentik.blueprints.v1.tasks.blueprints_discovery", "timestamp": "2026-04-25T16:51:36.199503"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "ddaff4ad457646f8ab2b2407c9b718f4", "task_name": "authentik.blueprints.v1.tasks.clear_failed_blueprints", "timestamp": "2026-04-25T16:51:36.201154"}
+{"app_name": "authentik.core", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.core.tasks", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.202828"}
+{"app_name": "authentik.core", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.core.signals", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.202967"}
+{"app_name": "authentik.enterprise", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.enterprise.tasks", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.211960"}
+{"app_name": "authentik.enterprise", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.enterprise.signals", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.214876"}
+{"app_name": "authentik.enterprise.providers.rac", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.enterprise.providers.rac.signals", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.224703"}
+{"app_name": "authentik.events", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.events.tasks", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.226158"}
+{"app_name": "authentik.events", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.events.signals", "pid": 198, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.226563"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "168f0abd77cc4c0bab468415f92f760c", "task_name": "authentik.core.tasks.clean_expired_models", "timestamp": "2026-04-25T16:51:36.243081"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "2ac88de44f3e4bccaf86c1c9ab8ba546", "task_name": "authentik.core.tasks.clean_temporary_users", "timestamp": "2026-04-25T16:51:36.246523"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "e25823eff95c40ea9cf422058c8793ef", "task_name": "authentik.enterprise.tasks.enterprise_update_usage", "timestamp": "2026-04-25T16:51:36.249646"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "cc7dc9fbd6254d23845678c5d0fa5bcc", "task_name": "authentik.events.tasks.notification_cleanup", "timestamp": "2026-04-25T16:51:36.252642"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "26101701d7d545978053aaf4888e6cb5", "task_name": "authentik.outposts.tasks.outpost_service_connection_monitor", "timestamp": "2026-04-25T16:51:36.255948"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "71e24c8c63c3420cb54ed80ed78a1cae", "task_name": "authentik.outposts.tasks.outpost_token_ensurer", "timestamp": "2026-04-25T16:51:36.258965"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "72b9776fe8714cac8cafbfdb0805afc0", "task_name": "authentik.policies.reputation.tasks.save_reputation", "timestamp": "2026-04-25T16:51:36.264152"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "2bae635446e6492dbd330fd35baef65c", "task_name": "authentik.admin.tasks.update_latest_version", "timestamp": "2026-04-25T16:51:36.267700"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "68dc7752b6f44366a9950d319a46af61", "task_name": "authentik.crypto.tasks.certificate_discovery", "timestamp": "2026-04-25T16:51:36.270774"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 198, "schema_name": "public", "task_id": "ef5ceafe3fc04f9299aec3daf289b67d", "task_name": "authentik.blueprints.v1.tasks.blueprints_discovery", "timestamp": "2026-04-25T16:51:36.277640"}
+{"app_name": "authentik.providers.scim", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.providers.scim.tasks", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.877954"}
+{"app_name": "authentik.providers.scim", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.providers.scim.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.881620"}
+{"app_name": "authentik.rbac", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.rbac.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.884821"}
+{"app_name": "authentik.sources.ldap", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.sources.ldap.tasks", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.911486"}
+{"app_name": "authentik.sources.ldap", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.sources.ldap.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.918149"}
+{"app_name": "authentik.sources.oauth", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.sources.oauth.tasks", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.922880"}
+/ak-root/venv/lib/python3.12/site-packages/facebook/__init__.py:99: SyntaxWarning: invalid escape sequence '\d'
+  version_regex = re.compile("^\d\.\d{1,2}$")
+{"app_name": "authentik.sources.saml", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.sources.saml.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.951476"}
+{"app_name": "authentik.stages.authenticator_duo", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.stages.authenticator_duo.tasks", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.956266"}
+{"app_name": "authentik.stages.authenticator_static", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.stages.authenticator_static.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.963320"}
+{"app_name": "authentik.stages.email", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.stages.email.tasks", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:36.964870"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "d36d12246b4b4080b7f71c2d3813379b", "task_name": "authentik.blueprints.v1.tasks.blueprints_discovery", "timestamp": "2026-04-25T16:51:37.018300"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "9a1895ec3a1f4edf845524ab00221baf", "task_name": "authentik.blueprints.v1.tasks.clear_failed_blueprints", "timestamp": "2026-04-25T16:51:37.020035"}
+{"app_name": "authentik.core", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.core.tasks", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:37.021772"}
+{"app_name": "authentik.core", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.core.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:37.024234"}
+{"app_name": "authentik.enterprise", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.enterprise.tasks", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:37.042940"}
+{"app_name": "authentik.enterprise", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.enterprise.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:37.044759"}
+{"app_name": "authentik.enterprise.providers.rac", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.enterprise.providers.rac.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:37.066884"}
+{"app_name": "authentik.events", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.events.tasks", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:37.076037"}
+{"app_name": "authentik.events", "domain_url": null, "event": "Imported related module", "level": "info", "logger": "authentik.blueprints.apps", "module": "authentik.events.signals", "pid": 199, "schema_name": "public", "timestamp": "2026-04-25T16:51:37.076887"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "1100ed9ff61747268486e5524b4d4d28", "task_name": "authentik.core.tasks.clean_expired_models", "timestamp": "2026-04-25T16:51:37.118327"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "9626c54ebcf54c67a0af46c551d2b642", "task_name": "authentik.core.tasks.clean_temporary_users", "timestamp": "2026-04-25T16:51:37.126345"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "1e48d97b686c4bd1801ffd66b607f213", "task_name": "authentik.enterprise.tasks.enterprise_update_usage", "timestamp": "2026-04-25T16:51:37.133845"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "dfa585f57efb4ec48ceb2a79905ebc2c", "task_name": "authentik.events.tasks.notification_cleanup", "timestamp": "2026-04-25T16:51:37.137973"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "1891d99143d643e8946603d127b846d4", "task_name": "authentik.outposts.tasks.outpost_service_connection_monitor", "timestamp": "2026-04-25T16:51:37.143335"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "51c0066029894fa58c111d826dd27b85", "task_name": "authentik.outposts.tasks.outpost_token_ensurer", "timestamp": "2026-04-25T16:51:37.148987"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "706b4512522947c0bf2873c7da6e7bc7", "task_name": "authentik.policies.reputation.tasks.save_reputation", "timestamp": "2026-04-25T16:51:37.160734"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "ce08448476fa4aa389f988e1e274f5fe", "task_name": "authentik.admin.tasks.update_latest_version", "timestamp": "2026-04-25T16:51:37.165514"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "cdd189737c844e38a6eef63f1d72a66f", "task_name": "authentik.crypto.tasks.certificate_discovery", "timestamp": "2026-04-25T16:51:37.172818"}
+{"domain_url": null, "event": "Task published", "level": "info", "logger": "authentik.root.celery", "pid": 199, "schema_name": "public", "task_id": "13473c4ff3c64191b07f35214facbebd", "task_name": "authentik.blueprints.v1.tasks.blueprints_discovery", "timestamp": "2026-04-25T16:51:37.184008"}
+{"auth_via": "unauthenticated", "domain_url": "localhost", "event": "/-/health/live/", "host": "localhost:8000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 198, "remote": "255.255.255.255", "request_id": "5d0110a79d704c28a5df5e2b899a263c", "runtime": 119, "schema_name": "public", "scheme": "http", "status": 204, "timestamp": "2026-04-25T16:51:38.653128", "user": "", "user_agent": "goauthentik.io/router/healthcheck"}
+{"event":"backend is alive, backing off with healthchecks","level":"info","logger":"authentik.router.unicorn","timestamp":"2026-04-25T16:51:38Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 198, "remote": "127.0.0.1", "request_id": "ca7cf943a6b64aefb9b894efc2c47dbb", "runtime": 219, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:38.959651", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/root/config/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 198, "remote": "127.0.0.1", "request_id": "3f3e40fd07c34871ab6ae2c79827c76a", "runtime": 91, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:39.101499", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"domain_url": null, "event": "/ws/outpost/dec085ad-40f9-41b0-9be6-7f8e83ce2c64/", "level": "info", "logger": "authentik.asgi", "pid": 198, "remote": "127.0.0.1", "schema_name": "public", "scheme": "ws", "timestamp": "2026-04-25T16:51:39.114400", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"Successfully connected websocket","level":"info","logger":"authentik.outpost.ak-ws","outpost":"dec085ad-40f9-41b0-9be6-7f8e83ce2c64","timestamp":"2026-04-25T16:51:39Z"}
+{"event":"Starting Brand TLS Checker","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T16:51:39Z"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T16:51:39Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 198, "remote": "127.0.0.1", "request_id": "87f9a672e8de4baea09b873ef834d88b", "runtime": 137, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:39.636993", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 198, "remote": "127.0.0.1", "request_id": "7ac4719eac504a108c5daf71e903224b", "runtime": 97, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:39.745077", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"Starting authentik outpost","hash":"tagged","level":"info","logger":"authentik.outpost","timestamp":"2026-04-25T16:51:39Z","version":"2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 198, "remote": "127.0.0.1", "request_id": "e502708123e240d5a12701f61cc77b6c", "runtime": 102, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:39.883420", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T16:51:39Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 198, "remote": "127.0.0.1", "request_id": "edc9a68da4cb444a8bbedb4e7768f44d", "runtime": 59, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:39.976479", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "4040e5d47e7b4a1bb1e8da02d957f4e3", "runtime": 125, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:52.818759", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "c065e8c292dc4cfa93f7e611532d6bea", "runtime": 95, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:52.957489", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T16:51:52Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "272b0b1d25ea4296bc998db62b729bee", "runtime": 89, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:53.095635", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "6679eb98093844e4b1685c84ac8bfde6", "runtime": 102, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:56.259787", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "c578616919ef496094b22c3f25658b46", "runtime": 116, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:56.457955", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T16:51:56Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "d0239dfa866941ea955202ba010ac309", "runtime": 50, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:56.562511", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "5f27d2aa033849fbb19ae6f6ec0d37df", "runtime": 156, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:59.785904", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "92694c77c32143c1ba725fa699fd994d", "runtime": 92, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:51:59.917882", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T16:51:59Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "f7034f0b319640aa82410bb851ec53ad", "runtime": 63, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:52:00.037980", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "3721b0f77bff4a9fb2c539003debd5c2", "runtime": 72, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:52:03.157953", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "3bbcd8bdb412401ea591852cb1b6caed", "runtime": 146, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:52:03.349990", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T16:52:03Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "751056c961dc4c21927c336b024e9389", "runtime": 64, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:52:03.471110", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/instances/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "7a21f109c9bf4046b4c87817c889724a", "runtime": 123, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:52:06.674117", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/outposts/proxy/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "cce0ff0c60ce4ef28cdb124081c16289", "runtime": 76, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:52:06.822495", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"event":"updating brand certificates","level":"info","logger":"authentik.router.brand_tls","timestamp":"2026-04-25T16:52:06Z"}
+{"auth_via": "secret_key", "domain_url": "0.0.0.0", "event": "/api/v3/core/brands/", "host": "0.0.0.0:9000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "127.0.0.1", "request_id": "bf74a45a85e342ca9ef2ff04d025b792", "runtime": 54, "schema_name": "public", "scheme": "http", "status": 200, "timestamp": "2026-04-25T16:52:06.948064", "user": "ak-outpost-dec085ad40f941b09be67f8e83ce2c64", "user_agent": "goauthentik.io/outpost/2024.2.2"}
+{"auth_via": "unauthenticated", "domain_url": "localhost", "event": "/-/health/live/", "host": "localhost:8000", "level": "info", "logger": "authentik.asgi", "method": "GET", "pid": 199, "remote": "255.255.255.255", "request_id": "17849a52cd764a998ef978cfa88f2f27", "runtime": 19, "schema_name": "public", "scheme": "http", "status": 204, "timestamp": "2026-04-25T16:52:08.729612", "user": "", "user_agent": "goauthentik.io/router/healthcheck"}
+
+----------------------------------------------------
+LOGS FOR: platform-traefik
+----------------------------------------------------
+time="2026-04-25T16:49:09Z" level=info msg="Configuration loaded from flags."
+time="2026-04-25T16:49:09Z" level=error msg="The ACME resolver \"letsencrypt\" is skipped from the resolvers list because: unable to get ACME account: permissions 666 for /etc/traefik/letsencrypt/acme.json are too open, please use 600"
+time="2026-04-25T16:49:10Z" level=error msg="HTTP challenge is not enabled" entryPointName=web routerName=acme-http@internal
+time="2026-04-25T16:49:10Z" level=error msg="HTTP challenge is not enabled" entryPointName=web routerName=acme-http@internal
+time="2026-04-25T16:49:10Z" level=error msg="Router traefik@docker uses a nonexistent resolver: letsencrypt"
+time="2026-04-25T16:49:52Z" level=error msg="HTTP challenge is not enabled" entryPointName=web routerName=acme-http@internal
+time="2026-04-25T16:49:52Z" level=error msg="Router plane-ai@docker uses a nonexistent resolver: letsencrypt"
+time="2026-04-25T16:49:52Z" level=error msg="Router traefik@docker uses a nonexistent resolver: letsencrypt"
+time="2026-04-25T16:51:20Z" level=error msg="HTTP challenge is not enabled" entryPointName=web routerName=acme-http@internal
+time="2026-04-25T16:51:20Z" level=error msg="Router traefik@docker uses a nonexistent resolver: letsencrypt"
+time="2026-04-25T16:51:20Z" level=error msg="Router authentik@docker uses a nonexistent resolver: letsencrypt"
+time="2026-04-25T16:51:20Z" level=error msg="Router plane-ai@docker uses a nonexistent resolver: letsencrypt"
+
+----------------------------------------------------
+LOGS FOR: platform-redis
+----------------------------------------------------
+1:C 25 Apr 2026 16:49:07.232 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+
+----------------------------------------------------
+LOGS FOR: platform-postgres
+----------------------------------------------------
+2026-04-25 16:49:10.277 UTC [40] LOG:  shutting down
+2026-04-25 16:49:10.280 UTC [40] LOG:  checkpoint starting: shutdown immediate
+2026-04-25 16:49:10.597 UTC [40] LOG:  checkpoint complete: wrote 1855 buffers (11.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.044 s, sync=0.269 s, total=0.321 s; sync files=604, longest=0.226 s, average=0.001 s; distance=8551 kB, estimate=8551 kB; lsn=0/1D4C3D0, redo lsn=0/1D4C3D0
+2026-04-25 16:49:10.611 UTC [39] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+2026-04-25 16:49:10.695 UTC [1] LOG:  starting PostgreSQL 16.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+2026-04-25 16:49:10.695 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-04-25 16:49:10.695 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-04-25 16:49:10.702 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-04-25 16:49:10.715 UTC [57] LOG:  database system was shut down at 2026-04-25 16:49:10 UTC
+2026-04-25 16:49:10.987 UTC [1] LOG:  database system is ready to accept connections
+2026-04-25 16:49:37.467 UTC [78] WARNING:  there is already a transaction in progress
+2026-04-25 16:49:54.486 UTC [95] FATAL:  password authentication failed for user "plane_ce"
+2026-04-25 16:49:54.486 UTC [95] DETAIL:  Role "plane_ce" does not exist.
+	Connection matched file "/var/lib/postgresql/data/pg_hba.conf" line 128: "host all all all scram-sha-256"
+2026-04-25 16:50:03.042 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:03.042 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."schema_name" = 'public' LIMIT 21 FOR UPDATE
+2026-04-25 16:50:03.046 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:03.046 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:03.155 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:03.155 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:03.159 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:03.159 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:03.237 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:03.237 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:03.312 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:03.312 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:03.316 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:03.316 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:03.341 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:03.341 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:03.345 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:03.345 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.274 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.274 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.279 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.279 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.307 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.307 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.333 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.333 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.336 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.336 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.339 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.339 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.341 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.341 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.343 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.343 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.384 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.384 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.389 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.389 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.393 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.393 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.395 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.395 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.409 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.409 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:50:04.410 UTC [104] ERROR:  relation "authentik_tenants_tenant" does not exist at character 554
+2026-04-25 16:50:04.410 UTC [104] STATEMENT:  SELECT "authentik_tenants_tenant"."tenant_uuid", "authentik_tenants_tenant"."schema_name", "authentik_tenants_tenant"."name", "authentik_tenants_tenant"."ready", "authentik_tenants_tenant"."avatars", "authentik_tenants_tenant"."default_user_change_name", "authentik_tenants_tenant"."default_user_change_email", "authentik_tenants_tenant"."default_user_change_username", "authentik_tenants_tenant"."event_retention", "authentik_tenants_tenant"."footer_links", "authentik_tenants_tenant"."gdpr_compliance", "authentik_tenants_tenant"."impersonation" FROM "authentik_tenants_tenant" WHERE "authentik_tenants_tenant"."ready"
+2026-04-25 16:51:55.160 UTC [269] ERROR:  duplicate key value violates unique constraint "authentik_flows_flow_slug_key"
+2026-04-25 16:51:55.160 UTC [269] DETAIL:  Key (slug)=(default-password-change) already exists.
+2026-04-25 16:51:55.160 UTC [269] STATEMENT:  INSERT INTO "authentik_flows_flow" ("policybindingmodel_ptr_id", "flow_uuid", "name", "slug", "title", "layout", "designation", "background", "compatibility_mode", "denied_action", "authentication") VALUES ('90c4276ee89f4cffb86b177349946723'::uuid, '316826c2cd984e9ab1a5342eafb8dd28'::uuid, 'Change Password', 'default-password-change', 'Change password', 'stacked', 'stage_configuration', '', false, 'message_continue', 'require_authenticated')
+2026-04-25 16:51:58.232 UTC [285] ERROR:  deadlock detected
+2026-04-25 16:51:58.232 UTC [285] DETAIL:  Process 285 waits for ShareLock on transaction 2432; blocked by process 293.
+	Process 293 waits for ShareLock on transaction 2429; blocked by process 285.
+	Process 285: UPDATE "authentik_flows_stage" SET "name" = 'default-authentication-login' WHERE "authentik_flows_stage"."stage_uuid" = '91d502dddf854a5299873aa28ff0bf1d'::uuid
+	Process 293: UPDATE "authentik_flows_stage" SET "name" = 'default-password-change-write' WHERE "authentik_flows_stage"."stage_uuid" = '5a37af8a7b694a7a9c18d07847d3c1c5'::uuid
+2026-04-25 16:51:58.232 UTC [285] HINT:  See server log for query details.
+2026-04-25 16:51:58.232 UTC [285] CONTEXT:  while updating tuple (0,42) in relation "authentik_flows_stage"
+2026-04-25 16:51:58.232 UTC [285] STATEMENT:  UPDATE "authentik_flows_stage" SET "name" = 'default-authentication-login' WHERE "authentik_flows_stage"."stage_uuid" = '91d502dddf854a5299873aa28ff0bf1d'::uuid
+2026-04-25 16:52:08.566 UTC [359] ERROR:  deadlock detected
+2026-04-25 16:52:08.566 UTC [359] DETAIL:  Process 359 waits for ShareLock on transaction 2610; blocked by process 356.
+	Process 356 waits for ShareLock on transaction 2612; blocked by process 359.
+	Process 359: UPDATE "authentik_flows_stage" SET "name" = 'default-password-change-write' WHERE "authentik_flows_stage"."stage_uuid" = '5a37af8a7b694a7a9c18d07847d3c1c5'::uuid
+	Process 356: UPDATE "authentik_flows_stage" SET "name" = 'default-authentication-login' WHERE "authentik_flows_stage"."stage_uuid" = '91d502dddf854a5299873aa28ff0bf1d'::uuid
+2026-04-25 16:52:08.566 UTC [359] HINT:  See server log for query details.
+2026-04-25 16:52:08.566 UTC [359] CONTEXT:  while updating tuple (0,149) in relation "authentik_flows_stage"
+2026-04-25 16:52:08.566 UTC [359] STATEMENT:  UPDATE "authentik_flows_stage" SET "name" = 'default-password-change-write' WHERE "authentik_flows_stage"."stage_uuid" = '5a37af8a7b694a7a9c18d07847d3c1c5'::uuid
+2026-04-25 16:52:13.484 UTC [388] ERROR:  deadlock detected
+2026-04-25 16:52:13.484 UTC [388] DETAIL:  Process 388 waits for ShareLock on transaction 2704; blocked by process 391.
+	Process 391 waits for ShareLock on transaction 2701; blocked by process 388.
+	Process 388: UPDATE "authentik_flows_stage" SET "name" = 'default-authentication-login' WHERE "authentik_flows_stage"."stage_uuid" = '91d502dddf854a5299873aa28ff0bf1d'::uuid
+	Process 391: UPDATE "authentik_flows_stage" SET "name" = 'default-password-change-write' WHERE "authentik_flows_stage"."stage_uuid" = '5a37af8a7b694a7a9c18d07847d3c1c5'::uuid
+2026-04-25 16:52:13.484 UTC [388] HINT:  See server log for query details.
+2026-04-25 16:52:13.484 UTC [388] CONTEXT:  while updating tuple (0,79) in relation "authentik_flows_stage"
+2026-04-25 16:52:13.484 UTC [388] STATEMENT:  UPDATE "authentik_flows_stage" SET "name" = 'default-authentication-login' WHERE "authentik_flows_stage"."stage_uuid" = '91d502dddf854a5299873aa28ff0bf1d'::uuid
+2026-04-25 16:52:18.789 UTC [421] ERROR:  deadlock detected
+2026-04-25 16:52:18.789 UTC [421] DETAIL:  Process 421 waits for ShareLock on transaction 2795; blocked by process 418.
+	Process 418 waits for ShareLock on transaction 2797; blocked by process 421.
+	Process 421: UPDATE "authentik_flows_stage" SET "name" = 'default-password-change-write' WHERE "authentik_flows_stage"."stage_uuid" = '5a37af8a7b694a7a9c18d07847d3c1c5'::uuid
+	Process 418: UPDATE "authentik_flows_stage" SET "name" = 'default-authentication-login' WHERE "authentik_flows_stage"."stage_uuid" = '91d502dddf854a5299873aa28ff0bf1d'::uuid
+2026-04-25 16:52:18.789 UTC [421] HINT:  See server log for query details.
+2026-04-25 16:52:18.789 UTC [421] CONTEXT:  while updating tuple (0,117) in relation "authentik_flows_stage"
+2026-04-25 16:52:18.789 UTC [421] STATEMENT:  UPDATE "authentik_flows_stage" SET "name" = 'default-password-change-write' WHERE "authentik_flows_stage"."stage_uuid" = '5a37af8a7b694a7a9c18d07847d3c1c5'::uuid
+
+--- [8] DOCKER NETWORKS ---
+de5dd23ef7bb   proxy     bridge    local

@@ -6,7 +6,7 @@ cd "$PLATFORM_ROOT"
 
 # Load domain from .env
 if [ -f .env ]; then
-    export $(grep -v '^#' .env | xargs)
+    set -a; source .env; set +a
 fi
 
 if [ -z "$DOMAIN" ]; then

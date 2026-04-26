@@ -6,7 +6,7 @@ cd "$PLATFORM_ROOT"
 
 # Load environment variables
 if [ -f .env ]; then
-    export $(grep -v '^#' .env | xargs)
+    set -a; source .env; set +a
 fi
 
 APP=$1

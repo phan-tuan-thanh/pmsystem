@@ -11,22 +11,26 @@ services:
       - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
       - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
       - "--api.dashboard=true"
-      # - "--api.insecure=true" # Only for debugging
+      - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedByDefault=false"
       - "--providers.docker.network=proxy"
       - "--providers.file.directory=/etc/traefik/dynamic"
       - "--providers.file.watch=true"
+      - "--accesslog=true"
+      - "--accesslog.format=json"
       - "--certificatesresolvers.letsencrypt.acme.email=${TRAEFIK_EMAIL}"
       - "--certificatesresolvers.letsencrypt.acme.storage=/etc/traefik/letsencrypt/acme.json"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
     ports:
       - "80:80"
       - "443:443"
+      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./letsencrypt:/etc/traefik/letsencrypt
       - ./dynamic:/etc/traefik/dynamic
+      - ./certs:/etc/traefik/certs:ro
     networks:
       - proxy
     labels:
@@ -34,10 +38,10 @@ services:
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)"
       - "traefik.http.routers.traefik.service=api@internal"
-      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
-      # Basic Auth for Dashboard (admin / password - generate your own)
-      # Use: echo $(htpasswd -nB admin) | sed -e s/\\$/\\$\\$/g
-      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:$$2y$$05$$vR1/C2v.A2m/J6.E/uA7u.GjR6Qz8fRzL5Zf5Z5Z5Z5Z5Z5Z5Z5Z"
+      - "traefik.http.routers.traefik.tls=true"
+      # Basic Auth for Dashboard: admin / admin (local dev only — change for production)
+      # Regenerate with: echo $(htpasswd -nB admin) | sed -e s/\\$/\\$\\$/g
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:$$2y$$12$$K.bfMI9bL.0J/NWmGnqsge0PpXQDWvKBKRxpMRN3wJWuM7O0GVqXa"
       - "traefik.http.routers.traefik.middlewares=traefik-auth"
 
 networks:

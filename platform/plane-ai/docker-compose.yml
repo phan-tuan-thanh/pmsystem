@@ -51,7 +51,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-ai.entrypoints=websecure"
       - "traefik.http.routers.plane-ai.rule=Host(`ai.${DOMAIN}`)"
-      - "traefik.http.routers.plane-ai.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.plane-ai.tls=true"
       - "traefik.http.services.plane-ai.loadbalancer.server.port=8001"
 
 networks:
