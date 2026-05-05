@@ -1,0 +1,4 @@
+email,display_name,first_name,last_name,role
+john.doe@company.com,John Doe,John,Doe,member
+jane.smith@company.com,Jane Smith,Jane,Smith,admin
+dev01@company.com,Dev 01,Dev,01,member

@@ -1,0 +1,6 @@
+external_id,project_external_id,name,color
+LBL-001,PROJ-001,bug,#e11d48
+LBL-002,PROJ-001,feature,#2563eb
+LBL-003,PROJ-001,improvement,#16a34a
+LBL-004,PROJ-002,bug,#e11d48
+LBL-005,PROJ-002,ui,#7c3aed

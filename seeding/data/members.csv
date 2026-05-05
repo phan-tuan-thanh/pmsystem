@@ -1,0 +1,6 @@
+project_external_id,user_email,role
+PROJ-001,jane.smith@company.com,20
+PROJ-001,dev01@company.com,15
+PROJ-002,john.doe@company.com,15
+PROJ-002,dev01@company.com,15
+PROJ-003,dev01@company.com,20

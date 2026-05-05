@@ -1,0 +1,6 @@
+external_id,project_external_id,title,description,state,priority,assignee_email,label_external_ids,due_date
+ISS-001,PROJ-001,Fix authentication timeout,Token expires too quickly causing logout,started,high,dev01@company.com,LBL-001,2026-06-15
+ISS-002,PROJ-001,Add pagination to user list API,Implement cursor-based pagination,backlog,medium,john.doe@company.com,LBL-002,2026-07-01
+ISS-003,PROJ-001,Optimize database queries,Slow queries on dashboard endpoint,backlog,high,,LBL-003,
+ISS-004,PROJ-002,Fix mobile menu overlap,Menu overlaps content on small screens,unstarted,medium,dev01@company.com,LBL-004;LBL-005,2026-06-20
+ISS-005,PROJ-002,Add dark mode toggle,User preference for dark/light theme,backlog,low,jane.smith@company.com,LBL-005,

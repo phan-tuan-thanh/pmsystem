@@ -1,0 +1,5 @@
+issue_external_id,author_email,body
+ISS-001,jane.smith@company.com,Confirmed reproducing on staging. Token TTL is currently 15 minutes.
+ISS-001,dev01@company.com,Looking into the JWT config. Will push fix today.
+ISS-002,john.doe@company.com,Reference pagination docs for cursor-based approach.
+ISS-004,dev01@company.com,Reproduced on iPhone SE. Z-index issue with nav component.

@@ -1,0 +1,4 @@
+external_id,name,identifier,description,network,owner_email
+PROJ-001,Backend API,BAPI,REST API and microservices,0,john.doe@company.com
+PROJ-002,Frontend Web,FWEB,React web application,0,jane.smith@company.com
+PROJ-003,Mobile App,MOBI,iOS and Android,0,john.doe@company.com
