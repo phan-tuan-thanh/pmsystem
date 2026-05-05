@@ -1,0 +1,13 @@
+# Environments
+.env
+.env.production
+.env.staging
+.env.local
+
+# Docker data
+postgres-data/
+redis-data/
+uploads/
+
+# OS files
+.DS_Store

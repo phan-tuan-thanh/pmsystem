@@ -1,0 +1,86 @@
+{
+  "mcpServers": {
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"]
+    },
+    "docker": {
+      "command": "uvx",
+      "args": ["mcp-server-docker"]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/ptud/Documents/Labs/github/PMS"
+      ]
+    },
+    "postgres": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://plane:plane@localhost:5432/plane"
+      ]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp", "--headless"]
+    }
+  },
+  "permissions": {
+    "allow": [
+      "Bash(docker compose*)",
+      "Bash(./scripts/deploy.sh*)",
+      "Bash(./scripts/stop.sh*)",
+      "Bash(./scripts/deploy-service.sh*)",
+      "Bash(./scripts/check.sh*)",
+      "Bash(docker ps*)",
+      "Bash(docker logs*)",
+      "Bash(docker inspect*)",
+      "Bash(docker network*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(./scripts/deploy*)",
+            "command": "cd /Users/ptud/Documents/Labs/github/PMS && ./scripts/check.sh 2>&1 || true",
+            "statusMessage": "Running pre-deploy checks...",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(./scripts/deploy*)",
+            "command": "cd /Users/ptud/Documents/Labs/github/PMS && docker compose -f docker-compose.postgres.yml -f docker-compose.redis.yml -f docker-compose.plane.yml ps 2>/dev/null || true",
+            "statusMessage": "Checking container status...",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "if": "Bash(docker compose up*)",
+            "command": "cd /Users/ptud/Documents/Labs/github/PMS && docker compose -f docker-compose.postgres.yml -f docker-compose.redis.yml -f docker-compose.plane.yml ps 2>/dev/null || true",
+            "statusMessage": "Checking container status...",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
