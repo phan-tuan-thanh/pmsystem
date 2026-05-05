@@ -35,24 +35,24 @@ Default for `--detach` is on (background). Pass `--no-detach` to stream logs.
 
 ## Architecture
 
-Five Docker Compose files, each owning one concern:
+Six Docker Compose files, mỗi file quản lý một concern:
 
 | File | Services |
 |---|---|
 | `docker-compose.postgres.yml` | `postgres` |
 | `docker-compose.redis.yml` | `redis` |
-| `docker-compose.plane.yml` | `plane-web`, `plane-api` |
+| `docker-compose.mq.yml` | `plane-mq` (RabbitMQ) |
+| `docker-compose.minio.yml` | `plane-minio`, `plane-minio-init` |
+| `docker-compose.plane.yml` | `plane-web`, `plane-api`, `plane-worker`, `plane-migrator`, `plane-space`, `plane-live`, `plane-admin`, `plane-beat-worker` |
 | `docker-compose.traefik.yml` | `traefik` (optional — bundled mode) |
 
-`deploy.sh` merges them with `-f` flags. Services communicate over an internal Docker network; only Traefik exposes public ports (HTTPS mandatory).
+`deploy.sh` merges chúng với `-f` flags. Services giao tiếp qua Docker network nội bộ; chỉ Traefik expose public ports (HTTPS mandatory).
+
+**MinIO:** OSS S3-compatible storage, bắt buộc cho file upload. Traefik route `/uploads/` → MinIO để presigned URL từ browser hoạt động. `AWS_S3_ENDPOINT_URL` phải là public domain.
 
 **Traefik modes:**
-- `--with-traefik` — spins up `docker-compose.traefik.yml` as part of this project (simplest, single-node)
-- `--external-traefik` — omits that file; assumes a central Traefik instance already running elsewhere with labels/entrypoints configured in `docker-compose.plane.yml`
-
-## Files Not Yet Present
-
-The four `docker-compose.*.yml` files and any `.env` files are not yet in this repo and must be created. `check.sh` will flag missing compose files before a deploy.
+- `--with-traefik` — spins up `docker-compose.traefik.yml` (đơn giản nhất, single-node)
+- `--external-traefik` — bỏ qua file đó; dùng Traefik bên ngoài đã có sẵn
 
 ## Data That Must Be Backed Up
 

@@ -108,7 +108,7 @@ if [ "$WITH_TRAEFIK" -eq 1 ]; then
 fi
 
 # 5. Define compose files
-COMPOSE_FILES="-f docker-compose.postgres.yml -f docker-compose.redis.yml -f docker-compose.mq.yml -f docker-compose.plane.yml"
+COMPOSE_FILES="-f docker-compose.postgres.yml -f docker-compose.redis.yml -f docker-compose.mq.yml -f docker-compose.minio.yml -f docker-compose.plane.yml"
 if [ "$WITH_TRAEFIK" -eq 1 ]; then
   COMPOSE_FILES="$COMPOSE_FILES -f docker-compose.traefik.yml"
 fi

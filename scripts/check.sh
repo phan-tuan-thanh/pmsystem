@@ -33,10 +33,12 @@ fi
 # 2. Compose files check
 echo "📄 Checking required compose files..."
 MISSING=0
-for f in docker-compose.postgres.yml docker-compose.redis.yml docker-compose.plane.yml; do
+for f in docker-compose.postgres.yml docker-compose.redis.yml docker-compose.mq.yml docker-compose.minio.yml docker-compose.plane.yml; do
   if [ ! -f "$f" ]; then
     echo "❗ Missing $f"
     MISSING=1
+  else
+    echo "✅ $f"
   fi
 done
 
