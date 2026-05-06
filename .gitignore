@@ -5,9 +5,12 @@
 .env.local
 
 # Docker data
+offline-bundle/
 postgres-data/
+rabbitmq_data/
 redis-data/
 uploads/
+traefik/
 
 # OS files
 .DS_Store
