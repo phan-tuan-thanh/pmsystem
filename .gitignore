@@ -5,6 +5,7 @@
 .env.local
 
 # Docker data
+.secrects
 offline-bundle/
 postgres-data/
 rabbitmq_data/
